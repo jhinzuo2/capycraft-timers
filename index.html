@@ -31,19 +31,13 @@
     <style>
         body { font-family: 'Inter', sans-serif; background: #0a0a0f; }
         .font-cinzel { font-family: 'Cinzel', serif; }
-
         .timer-digit {
             background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 4px; min-width: 44px; padding: 6px 4px; text-align: center;
+            border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; min-width: 52px; padding: 8px 6px; text-align: center;
         }
-        .timer-card {
-            position: relative; overflow: hidden; transition: all 0.3s ease; border-radius: 12px;
-        }
+        .timer-card { position: relative; overflow: hidden; transition: all 0.3s ease; border-radius: 12px; }
         .timer-card:hover { transform: translateY(-2px); }
-        .timer-card::after {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; z-index: 3;
-        }
+        .timer-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; z-index: 3; }
         .timer-card.glow-red::after { background: linear-gradient(90deg, transparent, rgba(200,80,80,0.6), transparent); }
         .timer-card.glow-purple::after { background: linear-gradient(90deg, transparent, rgba(160,100,220,0.6), transparent); }
         .timer-card.glow-gold::after { background: linear-gradient(90deg, transparent, rgba(200,168,78,0.6), transparent); }
@@ -58,45 +52,29 @@
         .bg-dmf { background: radial-gradient(ellipse at 50% 0%, rgba(200,168,78,0.14) 0%, transparent 55%), linear-gradient(180deg, #0f0d05 0%, #1a1508 50%, #0a0a0f 100%); }
         .bg-pvp { background: radial-gradient(ellipse at 0% 50%, rgba(59,111,160,0.14) 0%, transparent 55%), linear-gradient(180deg, #050810 0%, #080f1a 50%, #0a0a0f 100%); }
 
-        .locked-card {
-            background: linear-gradient(180deg, #0c0c10 0%, #0f0f14 50%, #0a0a0e 100%);
-            border: 1px dashed rgba(255,255,255,0.06); border-radius: 12px;
-            transition: border-color 0.3s;
-        }
+        .locked-card { background: linear-gradient(180deg, #0c0c10 0%, #0f0f14 50%, #0a0a0e 100%); border: 1px dashed rgba(255,255,255,0.06); border-radius: 12px; transition: border-color 0.3s; }
         .locked-card:hover { border-color: rgba(255,255,255,0.1); }
+        .locked-timer-card { background: linear-gradient(180deg, #0c0c10 0%, #0f0f14 50%, #0a0a0e 100%); border: 1px dashed rgba(255,255,255,0.06); border-radius: 12px; opacity: 0.55; transition: all 0.3s; }
+        .locked-timer-card:hover { opacity: 0.7; border-color: rgba(255,255,255,0.12); }
 
         .schedule-table tr:hover td { background: rgba(255,255,255,0.02); }
         .row-today td { background: rgba(200,168,78,0.04); }
         .row-today td:first-child { border-left: 2px solid rgba(200,168,78,0.35); }
-
         .st-today { background: rgba(59,160,59,0.18); color: #5bd45b; border: 1px solid rgba(59,160,59,0.25); }
         .st-tomorrow { background: rgba(59,111,160,0.18); color: #5ba8d4; border: 1px solid rgba(59,111,160,0.25); }
         .st-future { background: rgba(106,106,120,0.12); color: #7a7a8a; border: 1px solid rgba(106,106,120,0.15); }
         .st-off { background: rgba(160,80,80,0.15); color: #c06060; border: 1px solid rgba(160,80,80,0.25); }
-
         .gold-sep { height: 1px; background: linear-gradient(90deg, transparent, rgba(200,168,78,0.25), transparent); }
 
         @keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:1} }
         .pulse { animation: pulse 2s ease-in-out infinite; }
-
         .info-card { transition: all 0.3s; }
         .info-card:hover { border-color: rgba(200,168,78,0.18); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
-
-        .not-released-tag {
-            display: inline-flex; align-items: center; gap: 3px;
-            font-size: 9px; color: #a05050; background: rgba(160,80,80,0.12);
-            border: 1px solid rgba(160,80,80,0.2); border-radius: 4px;
-            padding: 1px 6px; margin-left: 6px; vertical-align: middle;
-        }
-
-        .tz-toggle {
-            display: inline-flex; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px;
-            overflow: hidden; font-size: 9px; cursor: pointer; user-select: none;
-        }
+        .not-released-tag { display: inline-flex; align-items: center; gap: 3px; font-size: 9px; color: #a05050; background: rgba(160,80,80,0.12); border: 1px solid rgba(160,80,80,0.2); border-radius: 4px; padding: 1px 6px; margin-left: 6px; vertical-align: middle; }
+        .tz-toggle { display: inline-flex; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; overflow: hidden; font-size: 9px; cursor: pointer; user-select: none; }
         .tz-btn { padding: 2px 8px; transition: all 0.2s; color: #5a5a6a; }
         .tz-btn.active { background: rgba(200,168,78,0.15); color: #e8d48b; }
         .tz-btn:hover:not(.active) { color: #888; }
-
         .reset-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; }
         .reset-row + .reset-row { border-top: 1px solid rgba(255,255,255,0.04); }
 
@@ -110,28 +88,28 @@
 
     <!-- ====== HEADER ====== -->
     <header class="border-b border-w-border/40 bg-w-darker/80 backdrop-blur-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
+        <div class="max-w-[1600px] mx-auto px-6 sm:px-8 py-3.5 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-w-gold to-w-gold-d flex items-center justify-center text-lg shadow-lg shadow-w-gold/10">🦫</div>
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-w-gold to-w-gold-d flex items-center justify-center text-xl shadow-lg shadow-w-gold/10">🦫</div>
                 <div>
-                    <h1 class="font-cinzel text-w-gold text-base sm:text-lg font-semibold tracking-wide">CapyCraft Timers</h1>
+                    <h1 class="font-cinzel text-w-gold text-lg sm:text-xl font-semibold tracking-wide">CapyCraft Timers</h1>
                     <p class="text-w-dim text-[10px] tracking-wide">capycraft.io</p>
                 </div>
             </div>
-            <div class="flex items-center gap-3 sm:gap-4">
-                <div class="hidden sm:flex items-center gap-2 text-xs">
+            <div class="flex items-center gap-4 sm:gap-5">
+                <div class="hidden sm:flex items-center gap-3 text-xs">
                     <div class="text-right leading-tight">
-                        <div class="text-w-bright font-medium" id="headerLocalTime">--:--</div>
+                        <div class="text-w-bright font-medium text-sm" id="headerLocalTime">--:--</div>
                         <div class="text-w-dim text-[9px]" id="headerTzLabel">Local</div>
                     </div>
                     <div class="text-w-dim/30">|</div>
                     <div class="text-right leading-tight">
-                        <div class="text-w-dim" id="headerServerTime">--:--</div>
+                        <div class="text-w-dim text-sm" id="headerServerTime">--:--</div>
                         <div class="text-w-dim/50 text-[9px]">Server (UTC+8)</div>
                     </div>
                 </div>
                 <a href="https://capycraft.io" target="_blank" class="text-xs text-w-gold hover:text-w-gold-l transition-colors flex items-center gap-1">
-                    <span class="iconify w-3 h-3" data-icon="mdi:open-in-new"></span>
+                    <span class="iconify w-3.5 h-3.5" data-icon="mdi:open-in-new"></span>
                     <span class="hidden sm:inline">capycraft.io</span>
                 </a>
             </div>
@@ -139,108 +117,171 @@
     </header>
 
     <!-- ====== MAIN ====== -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full">
+    <main class="max-w-[1600px] mx-auto px-6 sm:px-8 py-8 flex-1 w-full">
 
         <!-- Active Timer Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-3">
-
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
             <!-- Molten Core 40 -->
-            <div class="timer-card glow-red bg-mc border border-w-border/40 h-52">
-                <div class="flex flex-col justify-between h-full p-5">
+            <div class="timer-card glow-red bg-mc border border-w-border/40 h-64">
+                <div class="flex flex-col justify-between h-full p-6">
                     <div>
-                        <div class="flex items-center gap-2 mb-0.5">
-                            <span class="iconify w-4 h-4 text-red-400" data-icon="mdi:fire"></span>
-                            <h3 class="font-cinzel text-red-400 text-[13px] font-semibold tracking-wider uppercase">Molten Core</h3>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="iconify w-5 h-5 text-red-400" data-icon="mdi:fire"></span>
+                            <h3 class="font-cinzel text-red-400 text-[15px] font-semibold tracking-wider uppercase">Molten Core</h3>
                         </div>
-                        <p class="text-w-dim text-[10px] ml-6">40-man Raid · 7-day lockout</p>
+                        <p class="text-w-dim text-[11px] ml-7">40-man Raid · 7-day lockout</p>
                     </div>
-                    <div class="flex gap-1.5" id="timer-mc">
-                        <div class="timer-digit"><span class="text-red-300 font-semibold text-base font-inter">--</span><div class="text-w-dim text-[8px] uppercase mt-0.5">DAYS</div></div>
-                        <div class="timer-digit"><span class="text-red-300 font-semibold text-base font-inter">--</span><div class="text-w-dim text-[8px] uppercase mt-0.5">HRS</div></div>
-                        <div class="timer-digit"><span class="text-red-300 font-semibold text-base font-inter">--</span><div class="text-w-dim text-[8px] uppercase mt-0.5">MIN</div></div>
-                        <div class="timer-digit"><span class="text-red-300 font-semibold text-base font-inter">--</span><div class="text-w-dim text-[8px] uppercase mt-0.5">SEC</div></div>
+                    <div class="flex gap-2" id="timer-mc">
+                        <div class="timer-digit"><span class="text-red-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">DAYS</div></div>
+                        <div class="timer-digit"><span class="text-red-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">HRS</div></div>
+                        <div class="timer-digit"><span class="text-red-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">MIN</div></div>
+                        <div class="timer-digit"><span class="text-red-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">SEC</div></div>
                     </div>
                 </div>
             </div>
 
             <!-- Onyxia's Lair -->
-            <div class="timer-card glow-purple bg-onyxia border border-w-border/40 h-52">
-                <div class="flex flex-col justify-between h-full p-5">
+            <div class="timer-card glow-purple bg-onyxia border border-w-border/40 h-64">
+                <div class="flex flex-col justify-between h-full p-6">
                     <div>
-                        <div class="flex items-center gap-2 mb-0.5">
-                            <span class="iconify w-4 h-4 text-purple-400" data-icon="mdi:dragon"></span>
-                            <h3 class="font-cinzel text-purple-400 text-[13px] font-semibold tracking-wider uppercase">Onyxia's Lair</h3>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="iconify w-5 h-5 text-purple-400" data-icon="mdi:dragon"></span>
+                            <h3 class="font-cinzel text-purple-400 text-[15px] font-semibold tracking-wider uppercase">Onyxia's Lair</h3>
                         </div>
-                        <p class="text-w-dim text-[10px] ml-6">Raid · 5-day lockout</p>
+                        <p class="text-w-dim text-[11px] ml-7">Raid · 5-day lockout</p>
                     </div>
-                    <div class="flex gap-1.5" id="timer-onyxia">
-                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-base font-inter">--</span><div class="text-w-dim text-[8px] uppercase mt-0.5">DAYS</div></div>
-                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-base font-inter">--</span><div class="text-w-dim text-[8px] uppercase mt-0.5">HRS</div></div>
-                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-base font-inter">--</span><div class="text-w-dim text-[8px] uppercase mt-0.5">MIN</div></div>
-                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-base font-inter">--</span><div class="text-w-dim text-[8px] uppercase mt-0.5">SEC</div></div>
+                    <div class="flex gap-2" id="timer-onyxia">
+                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">DAYS</div></div>
+                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">HRS</div></div>
+                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">MIN</div></div>
+                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">SEC</div></div>
                     </div>
                 </div>
             </div>
 
             <!-- Darkmoon Faire -->
-            <div class="timer-card glow-gold bg-dmf border border-w-border/40 h-52">
-                <div class="flex flex-col justify-between h-full p-5">
+            <div class="timer-card glow-gold bg-dmf border border-w-border/40 h-64">
+                <div class="flex flex-col justify-between h-full p-6">
                     <div>
-                        <div class="flex items-center gap-2 mb-0.5">
-                            <span class="iconify w-4 h-4 text-w-gold" data-icon="mdi:tent"></span>
-                            <h3 class="font-cinzel text-w-gold text-[13px] font-semibold tracking-wider uppercase">Darkmoon Faire</h3>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="iconify w-5 h-5 text-w-gold" data-icon="mdi:tent"></span>
+                            <h3 class="font-cinzel text-w-gold text-[15px] font-semibold tracking-wider uppercase">Darkmoon Faire</h3>
                         </div>
-                        <p class="text-w-dim text-[10px] ml-6">Weekly rotation · Off Wed 02:00 server</p>
+                        <p class="text-w-dim text-[11px] ml-7">Weekly rotation · Off Wed 02:00 server</p>
+                        <div class="flex items-center gap-1.5 ml-7 mt-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-w-gold pulse" id="dmf-dot"></span>
+                            <span class="text-w-gold-l text-[12px] font-medium" id="dmf-current-loc">—</span>
+                        </div>
                     </div>
-                    <div class="flex gap-1.5" id="timer-dmf">
-                        <div class="timer-digit"><span class="text-yellow-200 font-semibold text-base font-inter">--</span><div class="text-w-dim text-[8px] uppercase mt-0.5">DAYS</div></div>
-                        <div class="timer-digit"><span class="text-yellow-200 font-semibold text-base font-inter">--</span><div class="text-w-dim text-[8px] uppercase mt-0.5">HRS</div></div>
-                        <div class="timer-digit"><span class="text-yellow-200 font-semibold text-base font-inter">--</span><div class="text-w-dim text-[8px] uppercase mt-0.5">MIN</div></div>
-                        <div class="timer-digit"><span class="text-yellow-200 font-semibold text-base font-inter">--</span><div class="text-w-dim text-[8px] uppercase mt-0.5">SEC</div></div>
+                    <div>
+                        <p class="text-[10px] text-w-gold/50 mb-2" id="dmf-timer-label">—</p>
+                        <div class="flex gap-2" id="timer-dmf">
+                            <div class="timer-digit"><span class="text-yellow-200 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">DAYS</div></div>
+                            <div class="timer-digit"><span class="text-yellow-200 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">HRS</div></div>
+                            <div class="timer-digit"><span class="text-yellow-200 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">MIN</div></div>
+                            <div class="timer-digit"><span class="text-yellow-200 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">SEC</div></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- PvP Daily -->
-            <div class="timer-card glow-blue bg-pvp border border-w-border/40 h-52">
-                <div class="flex flex-col justify-between h-full p-5">
+            <div class="timer-card glow-blue bg-pvp border border-w-border/40 h-64">
+                <div class="flex flex-col justify-between h-full p-6">
                     <div>
-                        <div class="flex items-center gap-2 mb-0.5">
-                            <span class="iconify w-4 h-4 text-blue-400" data-icon="mdi:sword-cross"></span>
-                            <h3 class="font-cinzel text-blue-400 text-[13px] font-semibold tracking-wider uppercase">PvP Daily</h3>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="iconify w-5 h-5 text-blue-400" data-icon="mdi:sword-cross"></span>
+                            <h3 class="font-cinzel text-blue-400 text-[15px] font-semibold tracking-wider uppercase">PvP Daily</h3>
                         </div>
-                        <p class="text-w-dim text-[10px] ml-6">Battleground rotation · <span id="pvp-next-name" class="text-blue-300/70">—</span></p>
+                        <p class="text-w-dim text-[11px] ml-7">Battleground rotation</p>
+                        <div class="flex items-center gap-1.5 ml-7 mt-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-blue-400 pulse"></span>
+                            <span class="text-blue-300 text-[12px] font-medium" id="pvp-current-bg">—</span>
+                        </div>
                     </div>
-                    <div class="flex gap-1.5" id="timer-pvp">
-                        <div class="timer-digit"><span class="text-blue-300 font-semibold text-base font-inter">--</span><div class="text-w-dim text-[8px] uppercase mt-0.5">HRS</div></div>
-                        <div class="timer-digit"><span class="text-blue-300 font-semibold text-base font-inter">--</span><div class="text-w-dim text-[8px] uppercase mt-0.5">MIN</div></div>
-                        <div class="timer-digit"><span class="text-blue-300 font-semibold text-base font-inter">--</span><div class="text-w-dim text-[8px] uppercase mt-0.5">SEC</div></div>
+                    <div>
+                        <p class="text-[10px] text-blue-400/50 mb-2" id="pvp-next-name">—</p>
+                        <div class="flex gap-2" id="timer-pvp">
+                            <div class="timer-digit"><span class="text-blue-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">HRS</div></div>
+                            <div class="timer-digit"><span class="text-blue-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">MIN</div></div>
+                            <div class="timer-digit"><span class="text-blue-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">SEC</div></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Not Released -->
+        <!-- Not Released Section -->
         <div class="mb-8">
-            <div class="flex items-center gap-2 mb-3 px-1">
-                <span class="iconify w-3.5 h-3.5 text-w-dim" data-icon="mdi:lock-outline"></span>
+            <div class="flex items-center gap-2 mb-4 px-1">
+                <span class="iconify w-4 h-4 text-w-dim" data-icon="mdi:lock-outline"></span>
                 <span class="text-w-dim text-[11px] uppercase tracking-widest font-medium">Not Released</span>
             </div>
+
+            <!-- Locked Timer Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-4">
+                <!-- Edge of Madness -->
+                <div class="locked-timer-card h-64">
+                    <div class="flex flex-col justify-between h-full p-6">
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="iconify w-5 h-5 text-w-dim/50" data-icon="mdi:skull-outline"></span>
+                                <h3 class="font-cinzel text-w-dim/60 text-[15px] font-semibold tracking-wider uppercase">Edge of Madness</h3>
+                            </div>
+                            <p class="text-w-dim/40 text-[11px] ml-7">Zul'Gurub Boss Rotation · ~2 week cycle</p>
+                            <div class="ml-7 mt-3 flex flex-wrap gap-2">
+                                <span class="text-[10px] px-2.5 py-1 bg-w-border/15 rounded text-w-dim/40 border border-w-border/10">Gri'lek</span>
+                                <span class="text-[10px] px-2.5 py-1 bg-w-border/15 rounded text-w-dim/40 border border-w-border/10">Renataki</span>
+                                <span class="text-[10px] px-2.5 py-1 bg-w-border/15 rounded text-w-dim/40 border border-w-border/10">Hazza'rah</span>
+                                <span class="text-[10px] px-2.5 py-1 bg-w-border/15 rounded text-w-dim/40 border border-w-border/10">Wushoolay</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="iconify w-4 h-4 text-w-dim/30" data-icon="mdi:lock-outline"></span>
+                            <span class="text-w-dim/40 text-[11px]">Not Released</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weekly Quest Reset -->
+                <div class="locked-timer-card h-64">
+                    <div class="flex flex-col justify-between h-full p-6">
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="iconify w-5 h-5 text-w-dim/50" data-icon="mdi:calendar-refresh"></span>
+                                <h3 class="font-cinzel text-w-dim/60 text-[15px] font-semibold tracking-wider uppercase">Weekly Quest Reset</h3>
+                            </div>
+                            <p class="text-w-dim/40 text-[11px] ml-7">Resets with raid lockout · 7-day cycle</p>
+                            <p class="text-w-dim/25 text-[10px] ml-7 mt-2 italic">Same reset window as Molten Core (04:00 UTC)</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="iconify w-4 h-4 text-w-dim/30" data-icon="mdi:lock-outline"></span>
+                            <span class="text-w-dim/40 text-[11px]">Not Released</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Smaller Locked Info Cards -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <!-- Raid 20 -->
                 <div class="locked-card p-5 flex items-center gap-4">
                     <span class="iconify w-7 h-7 text-w-dim/40 flex-shrink-0" data-icon="mdi:lock-outline"></span>
                     <div>
                         <h3 class="font-cinzel text-w-dim/60 text-xs font-semibold tracking-wider uppercase">Raid 20</h3>
-                        <p class="text-w-dim/30 text-[10px] mt-0.5">No timer available</p>
+                        <p class="text-w-dim/40 text-[10px] mt-0.5">Zul'Gurub & Ruins of Ahn'Qiraj</p>
+                        <p class="text-w-dim/25 text-[9px] mt-0.5 italic">ZG · AQ20</p>
                     </div>
                 </div>
+                <!-- Karazhan -->
                 <div class="locked-card p-5 flex items-center gap-4">
                     <span class="iconify w-7 h-7 text-w-dim/40 flex-shrink-0" data-icon="mdi:lock-outline"></span>
                     <div>
                         <h3 class="font-cinzel text-w-dim/60 text-xs font-semibold tracking-wider uppercase">Karazhan</h3>
-                        <p class="text-w-dim/30 text-[10px] mt-0.5">Lower Karazhan Halls (K10) · No timer</p>
+                        <p class="text-w-dim/30 text-[10px] mt-0.5">Lower Karazhan Halls (K10)</p>
                     </div>
                 </div>
+                <!-- Timbermaw Hold -->
                 <div class="locked-card p-5 flex items-center gap-4">
                     <span class="iconify w-7 h-7 text-w-dim/40 flex-shrink-0" data-icon="mdi:lock-outline"></span>
                     <div>
@@ -255,7 +296,6 @@
 
         <!-- Schedule Tables -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-
             <!-- DMF Schedule -->
             <div class="bg-w-card border border-w-border/40 rounded-xl overflow-hidden">
                 <div class="p-4 border-b border-w-border/30 flex items-center justify-between gap-3 flex-wrap">
@@ -332,8 +372,8 @@
         <div class="gold-sep mb-8"></div>
 
         <!-- Info Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <div class="info-card bg-w-card border border-w-border/40 rounded-xl p-5">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+            <div class="info-card bg-w-card border border-w-border/40 rounded-xl p-6">
                 <div class="flex items-center gap-2 mb-3">
                     <span class="iconify w-4 h-4 text-blue-400" data-icon="mdi:clock-outline"></span>
                     <h3 class="font-cinzel text-w-bright text-[11px] font-semibold tracking-wider uppercase">Server Time (UTC+8)</h3>
@@ -341,8 +381,7 @@
                 <div class="text-2xl font-inter font-semibold text-w-gold-l" id="serverTimeDisplay">--:--:--</div>
                 <div class="text-xs text-w-dim mt-1" id="serverDateDisplay">----/--/--</div>
             </div>
-
-            <div class="info-card bg-w-card border border-w-border/40 rounded-xl p-5">
+            <div class="info-card bg-w-card border border-w-border/40 rounded-xl p-6">
                 <div class="flex items-center gap-2 mb-3">
                     <span class="iconify w-4 h-4 text-w-gold/60" data-icon="mdi:map-clock-outline"></span>
                     <h3 class="font-cinzel text-w-bright text-[11px] font-semibold tracking-wider uppercase">Your Timezone</h3>
@@ -351,29 +390,16 @@
                 <div class="text-xs text-w-dim mt-1" id="userTzName">Detecting...</div>
                 <div class="text-[9px] text-w-dim/50 mt-2" id="userOffset">UTC+--</div>
             </div>
-
-            <div class="info-card bg-w-card border border-w-border/40 rounded-xl p-5">
+            <div class="info-card bg-w-card border border-w-border/40 rounded-xl p-6">
                 <div class="flex items-center gap-2 mb-3">
                     <span class="iconify w-4 h-4 text-orange-400/70" data-icon="mdi:timer-sand-complete"></span>
                     <h3 class="font-cinzel text-w-bright text-[11px] font-semibold tracking-wider uppercase">Reset Hours</h3>
                 </div>
                 <div>
-                    <div class="reset-row">
-                        <span class="text-[10px] text-w-dim">Raids</span>
-                        <span class="text-[10px] font-inter font-medium text-w-bright" id="reset-raid">--:-- UTC</span>
-                    </div>
-                    <div class="reset-row">
-                        <span class="text-[10px] text-w-dim">PvP BG</span>
-                        <span class="text-[10px] font-inter font-medium text-w-bright" id="reset-pvp">--:-- UTC</span>
-                    </div>
-                    <div class="reset-row">
-                        <span class="text-[10px] text-w-dim">DMF</span>
-                        <span class="text-[10px] font-inter font-medium text-w-bright">Wed 02:00 server · Off Day</span>
-                    </div>
-                    <div class="reset-row">
-                        <span class="text-[10px] text-w-dim">Honor</span>
-                        <span class="text-[10px] font-inter font-medium text-w-dim/50 italic">TBD</span>
-                    </div>
+                    <div class="reset-row"><span class="text-[10px] text-w-dim">Raids</span><span class="text-[10px] font-inter font-medium text-w-bright" id="reset-raid">--:-- UTC</span></div>
+                    <div class="reset-row"><span class="text-[10px] text-w-dim">PvP BG</span><span class="text-[10px] font-inter font-medium text-w-bright" id="reset-pvp">--:-- UTC</span></div>
+                    <div class="reset-row"><span class="text-[10px] text-w-dim">DMF</span><span class="text-[10px] font-inter font-medium text-w-bright">Wed 02:00 server · Off Day</span></div>
+                    <div class="reset-row"><span class="text-[10px] text-w-dim">Honor</span><span class="text-[10px] font-inter font-medium text-w-dim/50 italic">TBD</span></div>
                 </div>
             </div>
         </div>
@@ -382,20 +408,14 @@
 
     <!-- ====== FOOTER ====== -->
     <footer class="border-t border-w-border/20 py-5 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2">
+        <div class="max-w-[1600px] mx-auto px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
             <div class="text-w-dim/60 text-[11px] text-center sm:text-left">
                 © 2025 <a href="https://capycraft.io" class="text-w-gold/60 hover:text-w-gold transition-colors">CapyCraft</a> — Server runs UTC+8 · Countdowns accurate for all timezones
             </div>
             <div class="flex items-center gap-4 text-w-dim/50 text-[11px]">
-                <a href="https://capycraft.io" class="hover:text-w-gold/70 transition-colors flex items-center gap-1">
-                    <span class="iconify w-3 h-3" data-icon="mdi:web"></span> Website
-                </a>
-                <a href="#" class="hover:text-w-gold/70 transition-colors flex items-center gap-1">
-                    <span class="iconify w-3 h-3" data-icon="mdi:discord"></span> Discord
-                </a>
-                <a href="#" class="hover:text-w-gold/70 transition-colors flex items-center gap-1">
-                    <span class="iconify w-3 h-3" data-icon="mdi:github"></span> Source
-                </a>
+                <a href="https://capycraft.io" class="hover:text-w-gold/70 transition-colors flex items-center gap-1"><span class="iconify w-3 h-3" data-icon="mdi:web"></span> Website</a>
+                <a href="#" class="hover:text-w-gold/70 transition-colors flex items-center gap-1"><span class="iconify w-3 h-3" data-icon="mdi:discord"></span> Discord</a>
+                <a href="#" class="hover:text-w-gold/70 transition-colors flex items-center gap-1"><span class="iconify w-3 h-3" data-icon="mdi:github"></span> Source</a>
             </div>
         </div>
     </footer>
@@ -410,63 +430,38 @@
         const DAY_SH = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
         const MON_SH = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
-        // ─── Timezone ─────────────────────────────────────────
         let tzMode = { dmf: 'local', pvp: 'local' };
         const userTz     = Intl.DateTimeFormat().resolvedOptions().timeZone;
         const userOffset = -new Date().getTimezoneOffset();
-        const SERVER_OFFSET_MIN = 8 * 60; // UTC+8 — confirmed (HK-hosted, 6hr ahead of CEST in June)
+        const SERVER_OFFSET_MIN = 8 * 60; // UTC+8
 
         function offsetStr(m) {
             const s = m >= 0 ? '+' : '-', a = Math.abs(m);
             return `UTC${s}${pad(Math.floor(a/60))}:${pad(a%60)}`;
         }
         function fmtLocal(d) {
-            return { day: DAY_S[d.getDay()], ds: DAY_SH[d.getDay()],
-                     date: `${d.getDate()}.${MON_SH[d.getMonth()]}`,
-                     time: `${pad(d.getHours())}:${pad(d.getMinutes())}` };
+            return { day: DAY_S[d.getDay()], ds: DAY_SH[d.getDay()], date: `${d.getDate()}.${MON_SH[d.getMonth()]}`, time: `${pad(d.getHours())}:${pad(d.getMinutes())}` };
         }
         function fmtUTC(d) {
-            return { day: DAY_S[d.getUTCDay()], ds: DAY_SH[d.getUTCDay()],
-                     date: `${d.getUTCDate()}.${MON_SH[d.getUTCMonth()]}`,
-                     time: `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}` };
+            return { day: DAY_S[d.getUTCDay()], ds: DAY_SH[d.getUTCDay()], date: `${d.getUTCDate()}.${MON_SH[d.getUTCMonth()]}`, time: `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}` };
         }
         function utcHourToLocal(utcH) {
             const d = new Date(); d.setUTCHours(utcH, 0, 0, 0);
             return `${pad(d.getHours())}:${pad(d.getMinutes())}`;
         }
-        // Get a Date shifted into server time (UTC+8) for display purposes
         function toServerTime(d) {
             return new Date(d.getTime() + SERVER_OFFSET_MIN * 60000);
         }
 
-        // ═══════════════════════════════════════════════════════
-        //  REFERENCE DATES — re-anchored from live confirmation
-        // ═══════════════════════════════════════════════════════
-        //
-        //  Source: June 19, 2026, ~14:16 UTC (16:16 CEST Germany)
-        //    MC chat:    "Resets in 1d 13h 44m"  → reset = 2026-06-21 04:00 UTC
-        //    Onyxia UI:  "Resets in 1d 13h"      → reset ≈ 2026-06-21 04:00 UTC
-        //                (minutes unconfirmed, assumed same :44 as MC)
-        //    Server location: Hong Kong → UTC+8 confirmed
-        //                (16:19 local Germany = 22:19 server time, 6h gap matches CEST→UTC+8)
-        //    PvP: June 19, 2026 (server-day) = Alterac Valley (index 0)
-        //
-        //  MC40   (7-day): resets every 7 days at 04:00 UTC, anchored to 2026-06-21
-        //  Onyxia (5-day): resets every 5 days at 04:00 UTC, anchored to 2026-06-21
-        //
-        // ═══════════════════════════════════════════════════════
-
-        const RAID_RESET_H = 4; // 04:00 UTC — confirmed via in-game countdown
-        // Anchor to a confirmed future reset instant, then walk backward by full periods
+        // Reference dates
+        const RAID_RESET_H = 4;
         const MC_NEXT_RESET  = new Date('2026-06-21T04:00:00Z');
         const ONY_NEXT_RESET = new Date('2026-06-21T04:00:00Z');
-        const MC_REF  = new Date(MC_NEXT_RESET.getTime()  - 7 * 864e5); // one full 7-day period back
-        const ONY_REF = new Date(ONY_NEXT_RESET.getTime() - 5 * 864e5); // one full 5-day period back
+        const MC_REF  = new Date(MC_NEXT_RESET.getTime()  - 7 * 864e5);
+        const ONY_REF = new Date(ONY_NEXT_RESET.getTime() - 5 * 864e5);
 
-        // PvP: confirmed June 19, 2026 = Alterac Valley (index 0).
-        // Reset hour is NOT confirmed — using raid reset hour (04:00 UTC) as a working placeholder.
-        const PVP_RESET_H = 4; // PLACEHOLDER — confirm against next in-game BG flip
-        const PVP_REF = new Date('2026-06-19T04:00:00Z'); // AV start, per above placeholder hour
+        const PVP_RESET_H = 4; // PLACEHOLDER
+        const PVP_REF = new Date('2026-06-19T04:00:00Z');
         const PVP_MAPS = [
             { name: 'Alterac Valley',   released: true },
             { name: 'Warsong Gulch',    released: true },
@@ -475,21 +470,16 @@
             { name: 'Thorn Gorge',      released: false }
         ];
 
-        // ─── DMF Logic ────────────────────────────────────────
-        // Off day = Wednesday, starting 02:00 SERVER TIME (UTC+8) = Tuesday 18:00 UTC
-        const DMF_OFF_START_UTC_H = 18; // Tue 18:00 UTC = Wed 02:00 UTC+8
-        const DMF_REF = new Date('2026-06-16T00:00:00Z'); // arbitrary Sunday anchor for alternation parity (placeholder for which city is "even" week)
+        const DMF_REF = new Date('2026-06-16T00:00:00Z');
 
-        // Returns whether a given UTC instant falls within the off-day window,
-        // using server-time weekday (UTC+8) as the basis for "Wednesday".
         function isOffWindow(utcDate) {
             const srv = toServerTime(utcDate);
-            return srv.getUTCDay() === 3; // Wednesday in server time
+            return srv.getUTCDay() === 3;
         }
+
         function getDMFInfo(utcDate) {
             const srv = toServerTime(utcDate);
             if (srv.getUTCDay() === 3) return { loc: 'Off', isOff: true };
-            // Determine alternation by ISO week (server-time based) relative to DMF_REF
             const srvDow = srv.getUTCDay();
             const thisSun = new Date(Date.UTC(srv.getUTCFullYear(), srv.getUTCMonth(), srv.getUTCDate() - srvDow));
             const refSrv = toServerTime(DMF_REF);
@@ -499,18 +489,45 @@
             return { loc: weeksSince % 2 === 0 ? 'Goldshire' : 'Thunder Bluff', isOff: false };
         }
 
-        function nextDMFEvent() {
-            let d = new Date();
-            for (let i = 0; i < 8; i++) {
-                const candidate = new Date(d.getTime() + i * 864e5);
-                if (toServerTime(candidate).getUTCDay() === 3) {
-                    return { date: candidate, label: 'Off Day' };
-                }
-            }
-            return { date: d, label: 'Off Day' };
+        function currentDMFStatus() {
+            const now = new Date();
+            const utcDay = now.getUTCDay();
+            const utcH = now.getUTCHours();
+            const inOff = (utcDay === 2 && utcH >= 18) || (utcDay === 3 && utcH < 18);
+            if (inOff) return { text: 'Off Day', isOff: true };
+            const info = getDMFInfo(now);
+            return { text: info.loc, isOff: false };
         }
 
-        // ─── Timer Helpers ────────────────────────────────────
+        function nextDMFStateChange() {
+            const now = new Date();
+            const utcDay = now.getUTCDay();
+            const utcH = now.getUTCHours();
+            const inOff = (utcDay === 2 && utcH >= 18) || (utcDay === 3 && utcH < 18);
+
+            if (inOff) {
+                const target = new Date(now);
+                if (utcDay === 2) target.setUTCDate(target.getUTCDate() + 1);
+                target.setUTCHours(18, 0, 0, 0);
+                return { date: target, label: 'Faire Returns', isOff: true };
+            }
+
+            const target = new Date(now);
+            let daysToTue = (2 - utcDay + 7) % 7;
+            if (daysToTue === 0 && utcH >= 18) daysToTue = 7;
+            target.setUTCDate(target.getUTCDate() + daysToTue);
+            target.setUTCHours(18, 0, 0, 0);
+            return { date: target, label: 'Faire Closes', isOff: false };
+        }
+
+        function currentPvPIndex() {
+            const now = new Date();
+            const todayReset = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), PVP_RESET_H, 0, 0));
+            const lastReset = now >= todayReset ? todayReset : new Date(todayReset.getTime() - 864e5);
+            const daysSince = Math.round((lastReset - PVP_REF) / 864e5);
+            return ((daysSince % 5) + 5) % 5;
+        }
+
         function nextPeriodic(ref, hrs) {
             const p = hrs * 36e5, now = Date.now();
             return new Date(ref.getTime() + Math.ceil((now - ref.getTime()) / p) * p);
@@ -522,39 +539,62 @@
             return r;
         }
 
-        // PvP cycle index for a given UTC date (BG active after daily reset)
         function pvpIndexForDate(utcDate) {
-            const dayStart = new Date(Date.UTC(
-                utcDate.getUTCFullYear(), utcDate.getUTCMonth(), utcDate.getUTCDate(),
-                PVP_RESET_H, 0, 0
-            ));
+            const dayStart = new Date(Date.UTC(utcDate.getUTCFullYear(), utcDate.getUTCMonth(), utcDate.getUTCDate(), PVP_RESET_H, 0, 0));
             const daysSince = (dayStart - PVP_REF) / 864e5;
             return ((Math.round(daysSince) % 5) + 5) % 5;
         }
 
         function diff(t) {
             let m = Math.max(0, t - new Date());
-            return { d: Math.floor(m/864e5), h: Math.floor(m%864e5/36e5),
-                     m: Math.floor(m%36e5/6e4), s: Math.floor(m%6e4/1e3) };
+            return { d: Math.floor(m/864e5), h: Math.floor(m%864e5/36e5), m: Math.floor(m%36e5/6e4), s: Math.floor(m%6e4/1e3) };
         }
+        
         function setDig(id, d, days) {
-            const sp = document.getElementById(id).querySelectorAll('.font-inter');
-            if (days) { sp[0].textContent=pad(d.d); sp[1].textContent=pad(d.h); sp[2].textContent=pad(d.m); sp[3].textContent=pad(d.s); }
-            else      { sp[0].textContent=pad(d.h); sp[1].textContent=pad(d.m); sp[2].textContent=pad(d.s); }
+            const el = document.getElementById(id);
+            if (!el) return;
+            const sp = el.querySelectorAll('.font-inter');
+            if (days) { 
+                if(sp[0]) sp[0].textContent=pad(d.d); 
+                if(sp[1]) sp[1].textContent=pad(d.h); 
+                if(sp[2]) sp[2].textContent=pad(d.m); 
+                if(sp[3]) sp[3].textContent=pad(d.s); 
+            } else {      
+                if(sp[0]) sp[0].textContent=pad(d.h); 
+                if(sp[1]) sp[1].textContent=pad(d.m); 
+                if(sp[2]) sp[2].textContent=pad(d.s); 
+            }
         }
 
         function tickTimers() {
-            setDig('timer-mc',     diff(nextPeriodic(MC_REF, 168)),  true);
+            setDig('timer-mc', diff(nextPeriodic(MC_REF, 168)), true);
             setDig('timer-onyxia', diff(nextPeriodic(ONY_REF, 120)), true);
-            const ev = nextDMFEvent();
-            setDig('timer-dmf',    diff(ev.date), true);
-            setDig('timer-pvp',    diff(nextPvPReset()), false);
+            
+            const dmfEvent = nextDMFStateChange();
+            setDig('timer-dmf', diff(dmfEvent.date), true);
+            document.getElementById('dmf-timer-label').textContent = dmfEvent.label;
 
+            const dmfStatus = currentDMFStatus();
+            const dmfLocEl = document.getElementById('dmf-current-loc');
+            const dmfDotEl = document.getElementById('dmf-dot');
+            if (dmfStatus.isOff) {
+                dmfLocEl.textContent = 'Off Day';
+                dmfLocEl.className = 'text-red-400/60 text-[12px] font-medium';
+                dmfDotEl.className = 'w-1.5 h-1.5 rounded-full bg-red-400/60 pulse';
+            } else {
+                dmfLocEl.textContent = 'Currently: ' + dmfStatus.text;
+                dmfLocEl.className = 'text-w-gold-l text-[12px] font-medium';
+                dmfDotEl.className = 'w-1.5 h-1.5 rounded-full bg-w-gold pulse';
+            }
+
+            setDig('timer-pvp', diff(nextPvPReset()), false);
+
+            const curIdx = currentPvPIndex();
             const nextIdx = pvpIndexForDate(nextPvPReset());
+            document.getElementById('pvp-current-bg').textContent = 'Now: ' + PVP_MAPS[curIdx].name;
             document.getElementById('pvp-next-name').textContent = 'Next: ' + PVP_MAPS[nextIdx].name;
         }
 
-        // ─── Clock ────────────────────────────────────────────
         function tickClock() {
             const n = new Date();
             const srv = toServerTime(n);
@@ -573,7 +613,6 @@
             document.getElementById('reset-pvp').textContent  = `${pad(PVP_RESET_H)}:00 UTC · ${utcHourToLocal(PVP_RESET_H)} local`;
         }
 
-        // ─── Status Badge ─────────────────────────────────────
         function badge(i, isOff) {
             if (i === 0 && isOff) return '<span class="inline-block px-2 py-0.5 rounded-full text-[9px] font-medium st-off">Today · Off</span>';
             if (i === 0)          return '<span class="inline-block px-2 py-0.5 rounded-full text-[9px] font-medium st-today">Today</span>';
@@ -581,7 +620,6 @@
             return `<span class="inline-block px-2 py-0.5 rounded-full text-[9px] font-medium st-future">In ${i} days</span>`;
         }
 
-        // ─── DMF Table ────────────────────────────────────────
         function buildDMF() {
             const useLocal = tzMode.dmf === 'local';
             const tbody = document.getElementById('dmf-body');
@@ -600,13 +638,11 @@
                     <td class="py-2.5 px-4 text-right">${badge(i, info.isOff)}</td>`;
                 tbody.appendChild(tr);
             }
-            const ev = nextDMFEvent();
+            const ev = nextDMFStateChange();
             const ef = useLocal ? fmtLocal(ev.date) : fmtUTC(ev.date);
-            document.getElementById('dmf-reset-label').innerHTML =
-                `<span class="iconify w-3 h-3" data-icon="mdi:clock-outline"></span> NEXT: ${ef.ds}, ${ef.date} ${ev.label}`;
+            document.getElementById('dmf-reset-label').innerHTML = `<span class="iconify w-3 h-3" data-icon="mdi:clock-outline"></span> ${ev.label}: ${ef.ds}, ${ef.date} ${ef.time}`;
         }
 
-        // ─── PvP Table ────────────────────────────────────────
         function buildPvP() {
             const useLocal = tzMode.pvp === 'local';
             const now = new Date();
@@ -634,11 +670,9 @@
 
             const nr = nextPvPReset();
             const nf = useLocal ? fmtLocal(nr) : fmtUTC(nr);
-            document.getElementById('pvp-reset-label').innerHTML =
-                `<span class="iconify w-3 h-3" data-icon="mdi:clock-outline"></span> NEXT: ${nf.ds}, ${nf.date} ${nf.time}`;
+            document.getElementById('pvp-reset-label').innerHTML = `<span class="iconify w-3 h-3" data-icon="mdi:clock-outline"></span> NEXT: ${nf.ds}, ${nf.date} ${nf.time}`;
         }
 
-        // ─── TZ Toggle ────────────────────────────────────────
         document.querySelectorAll('.tz-toggle').forEach(tog => {
             const tbl = tog.dataset.table;
             tog.querySelectorAll('.tz-btn').forEach(btn => {
@@ -651,7 +685,6 @@
             });
         });
 
-        // ─── Init ─────────────────────────────────────────────
         document.addEventListener('DOMContentLoaded', () => {
             tickTimers(); tickClock(); buildDMF(); buildPvP();
             setInterval(tickTimers, 1000);
