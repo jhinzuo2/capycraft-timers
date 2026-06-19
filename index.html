@@ -363,8 +363,8 @@
                     </table>
                 </div>
                 <div class="px-4 py-2 border-t border-w-border/20 flex items-center gap-1.5">
-                    <span class="iconify w-3 h-3 text-w-dim/50" data-icon="mdi:information-outline"></span>
-                    <span class="text-[9px] text-w-dim/50">Reset hour shown as placeholder (assumed same as raid reset) — please confirm against a real rotation flip.</span>
+                    <span class="iconify w-3 h-3 text-w-dim/50" data-icon="mdi:check-circle-outline"></span>
+                    <span class="text-[9px] text-w-dim/50">Resets daily at 16:00 UTC (18:00 CEST / 00:00 Server).</span>
                 </div>
             </div>
         </div>
@@ -454,14 +454,16 @@
         }
 
         // Reference dates
-        const RAID_RESET_H = 4;
+        const RAID_RESET_H = 4; // 04:00 UTC
         const MC_NEXT_RESET  = new Date('2026-06-21T04:00:00Z');
         const ONY_NEXT_RESET = new Date('2026-06-21T04:00:00Z');
         const MC_REF  = new Date(MC_NEXT_RESET.getTime()  - 7 * 864e5);
         const ONY_REF = new Date(ONY_NEXT_RESET.getTime() - 5 * 864e5);
 
-        const PVP_RESET_H = 4; // PLACEHOLDER
-        const PVP_REF = new Date('2026-06-19T04:00:00Z');
+        // PvP: Confirmed June 20, 2026 18:00 CEST (16:00 UTC / 00:00 Server) = Warsong Gulch flip
+        // Therefore June 19, 2026 16:00 UTC was Alterac Valley (index 0)
+        const PVP_RESET_H = 16; // CONFIRMED: 16:00 UTC = 18:00 CEST = 00:00 Server
+        const PVP_REF = new Date('2026-06-19T16:00:00Z'); // AV start at confirmed hour
         const PVP_MAPS = [
             { name: 'Alterac Valley',   released: true },
             { name: 'Warsong Gulch',    released: true },
