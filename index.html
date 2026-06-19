@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CapyCraft Timers — Raid, PvP & Event Countdowns</title>
     <meta name="description" content="Live countdown timers for CapyCraft.io raids, PvP battlegrounds, Darkmoon Faire, and more.">
+    
+    <!-- Favicon (Capybara Emoji) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦫</text></svg>">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +41,7 @@
         }
         .timer-card { position: relative; overflow: hidden; transition: all 0.3s ease; border-radius: 12px; }
         .timer-card:hover { transform: translateY(-2px); }
-        .timer-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; z-index: 3; }
+        .timer-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; z-index: 10; }
         .timer-card.glow-red::after { background: linear-gradient(90deg, transparent, rgba(200,80,80,0.6), transparent); }
         .timer-card.glow-purple::after { background: linear-gradient(90deg, transparent, rgba(160,100,220,0.6), transparent); }
         .timer-card.glow-gold::after { background: linear-gradient(90deg, transparent, rgba(200,168,78,0.6), transparent); }
@@ -46,11 +50,6 @@
         .timer-card.glow-purple:hover { box-shadow: 0 8px 32px rgba(160,100,220,0.12); }
         .timer-card.glow-gold:hover { box-shadow: 0 8px 32px rgba(200,168,78,0.12); }
         .timer-card.glow-blue:hover { box-shadow: 0 8px 32px rgba(80,140,220,0.12); }
-
-        .bg-mc { background: radial-gradient(ellipse at 50% 100%, rgba(160,50,50,0.18) 0%, transparent 55%), linear-gradient(180deg, #0f0505 0%, #1a0808 50%, #0a0a0f 100%); }
-        .bg-onyxia { background: radial-gradient(ellipse at 50% 60%, rgba(120,60,160,0.14) 0%, transparent 55%), linear-gradient(180deg, #08050f 0%, #0f081a 50%, #0a0a0f 100%); }
-        .bg-dmf { background: radial-gradient(ellipse at 50% 0%, rgba(200,168,78,0.14) 0%, transparent 55%), linear-gradient(180deg, #0f0d05 0%, #1a1508 50%, #0a0a0f 100%); }
-        .bg-pvp { background: radial-gradient(ellipse at 0% 50%, rgba(59,111,160,0.14) 0%, transparent 55%), linear-gradient(180deg, #050810 0%, #080f1a 50%, #0a0a0f 100%); }
 
         .locked-card { background: linear-gradient(180deg, #0c0c10 0%, #0f0f14 50%, #0a0a0e 100%); border: 1px dashed rgba(255,255,255,0.06); border-radius: 12px; transition: border-color 0.3s; }
         .locked-card:hover { border-color: rgba(255,255,255,0.1); }
@@ -116,14 +115,25 @@
         </div>
     </header>
 
+    <!-- ====== REALM BANNER ====== -->
+    <div class="bg-w-card/50 border-b border-w-border/20 py-2 text-center">
+        <div class="flex items-center justify-center gap-2">
+            <span class="iconify w-4 h-4 text-w-gold" data-icon="mdi:sword"></span>
+            <span class="font-cinzel text-w-gold text-xs sm:text-sm tracking-[0.2em] uppercase font-semibold">Realm: Eversong Wilds</span>
+            <span class="iconify w-4 h-4 text-w-gold" data-icon="mdi:shield-sword"></span>
+        </div>
+    </div>
+
     <!-- ====== MAIN ====== -->
     <main class="max-w-[1600px] mx-auto px-6 sm:px-8 py-8 flex-1 w-full">
 
         <!-- Active Timer Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
             <!-- Molten Core 40 -->
-            <div class="timer-card glow-red bg-mc border border-w-border/40 h-64">
-                <div class="flex flex-col justify-between h-full p-6">
+            <div class="timer-card glow-red border border-w-border/40 h-64 relative">
+                <img src="/assets/mc.jpg" alt="Molten Core" class="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none">
+                <div class="absolute inset-0 bg-gradient-to-t from-w-dark via-w-dark/80 to-transparent z-[1]"></div>
+                <div class="relative z-[2] flex flex-col justify-between h-full p-6">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="iconify w-5 h-5 text-red-400" data-icon="mdi:fire"></span>
@@ -141,8 +151,10 @@
             </div>
 
             <!-- Onyxia's Lair -->
-            <div class="timer-card glow-purple bg-onyxia border border-w-border/40 h-64">
-                <div class="flex flex-col justify-between h-full p-6">
+            <div class="timer-card glow-purple border border-w-border/40 h-64 relative">
+                <img src="/assets/onyxia.png" alt="Onyxia" class="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none">
+                <div class="absolute inset-0 bg-gradient-to-t from-w-dark via-w-dark/80 to-transparent z-[1]"></div>
+                <div class="relative z-[2] flex flex-col justify-between h-full p-6">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="iconify w-5 h-5 text-purple-400" data-icon="mdi:dragon"></span>
@@ -160,8 +172,10 @@
             </div>
 
             <!-- Darkmoon Faire -->
-            <div class="timer-card glow-gold bg-dmf border border-w-border/40 h-64">
-                <div class="flex flex-col justify-between h-full p-6">
+            <div class="timer-card glow-gold border border-w-border/40 h-64 relative">
+                <img id="img-dmf" src="/assets/dmf%20goldshire.jpg" alt="Darkmoon Faire" class="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none transition-all duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-w-dark via-w-dark/80 to-transparent z-[1]"></div>
+                <div class="relative z-[2] flex flex-col justify-between h-full p-6">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="iconify w-5 h-5 text-w-gold" data-icon="mdi:tent"></span>
@@ -170,7 +184,7 @@
                         <p class="text-w-dim text-[11px] ml-7">Weekly rotation · Off Wed 02:00 server</p>
                         <div class="flex items-center gap-1.5 ml-7 mt-1.5">
                             <span class="w-1.5 h-1.5 rounded-full bg-w-gold pulse" id="dmf-dot"></span>
-                            <span class="text-w-gold-l text-[12px] font-medium" id="dmf-current-loc">—</span>
+                            <span class="text-amber-400 text-[12px] font-medium" id="dmf-current-loc">—</span>
                         </div>
                     </div>
                     <div>
@@ -186,8 +200,17 @@
             </div>
 
             <!-- PvP Daily -->
-            <div class="timer-card glow-blue bg-pvp border border-w-border/40 h-64">
-                <div class="flex flex-col justify-between h-full p-6">
+            <div class="timer-card glow-blue border border-w-border/40 h-64 relative">
+                <img id="img-pvp" src="/assets/av.jpg" alt="Battleground" class="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none transition-all duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-w-dark via-w-dark/80 to-transparent z-[1]"></div>
+                <!-- Locked Overlay -->
+                <div id="pvp-locked-overlay" class="absolute inset-0 z-[2] bg-w-dark/40 backdrop-blur-[2px] hidden transition-all">
+                    <div class="flex items-center justify-center h-full">
+                        <span class="not-released-tag text-xs px-3 py-1"><span class="iconify w-3 h-3" data-icon="mdi:lock-outline"></span>Not Released</span>
+                    </div>
+                </div>
+
+                <div class="relative z-[3] flex flex-col justify-between h-full p-6">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="iconify w-5 h-5 text-blue-400" data-icon="mdi:sword-cross"></span>
@@ -195,8 +218,8 @@
                         </div>
                         <p class="text-w-dim text-[11px] ml-7">Battleground rotation</p>
                         <div class="flex items-center gap-1.5 ml-7 mt-1.5">
-                            <span class="w-1.5 h-1.5 rounded-full bg-blue-400 pulse"></span>
-                            <span class="text-blue-300 text-[12px] font-medium" id="pvp-current-bg">—</span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-blue-400 pulse" id="pvp-dot"></span>
+                            <span class="text-amber-400 text-[12px] font-medium" id="pvp-current-bg">—</span>
                         </div>
                     </div>
                     <div>
@@ -410,12 +433,12 @@
     <footer class="border-t border-w-border/20 py-5 mt-auto">
         <div class="max-w-[1600px] mx-auto px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
             <div class="text-w-dim/60 text-[11px] text-center sm:text-left">
-                © 2025 <a href="https://capycraft.io" class="text-w-gold/60 hover:text-w-gold transition-colors">CapyCraft</a> — Server runs UTC+8 · Countdowns accurate for all timezones
+                © 2026 <a href="https://capycraft.io" class="text-w-gold/60 hover:text-w-gold transition-colors">CapyCraft</a> — Server runs UTC+8 · Countdowns accurate for all timezones
             </div>
             <div class="flex items-center gap-4 text-w-dim/50 text-[11px]">
                 <a href="https://capycraft.io" class="hover:text-w-gold/70 transition-colors flex items-center gap-1"><span class="iconify w-3 h-3" data-icon="mdi:web"></span> Website</a>
-                <a href="#" class="hover:text-w-gold/70 transition-colors flex items-center gap-1"><span class="iconify w-3 h-3" data-icon="mdi:discord"></span> Discord</a>
-                <a href="#" class="hover:text-w-gold/70 transition-colors flex items-center gap-1"><span class="iconify w-3 h-3" data-icon="mdi:github"></span> Source</a>
+                <a href="https://discord.gg/KZFw6ffFC" target="_blank" class="hover:text-w-gold/70 transition-colors flex items-center gap-1"><span class="iconify w-3 h-3" data-icon="mdi:discord"></span> Discord</a>
+                <a href="https://github.com/jhinzuo2/capycraft-timers" target="_blank" class="hover:text-w-gold/70 transition-colors flex items-center gap-1"><span class="iconify w-3 h-3" data-icon="mdi:github"></span> Source</a>
             </div>
         </div>
     </footer>
@@ -453,24 +476,29 @@
             return new Date(d.getTime() + SERVER_OFFSET_MIN * 60000);
         }
 
-        // Reference dates
+        // Anchored to the correct year of 2026
         const RAID_RESET_H = 4; // 04:00 UTC
         const MC_NEXT_RESET  = new Date('2026-06-21T04:00:00Z');
         const ONY_NEXT_RESET = new Date('2026-06-21T04:00:00Z');
         const MC_REF  = new Date(MC_NEXT_RESET.getTime()  - 7 * 864e5);
         const ONY_REF = new Date(ONY_NEXT_RESET.getTime() - 5 * 864e5);
 
-        // PvP: Confirmed June 20, 2026 18:00 CEST (16:00 UTC / 00:00 Server) = Warsong Gulch flip
-        // Therefore June 19, 2026 16:00 UTC was Alterac Valley (index 0)
         const PVP_RESET_H = 16; // CONFIRMED: 16:00 UTC = 18:00 CEST = 00:00 Server
-        const PVP_REF = new Date('2026-06-19T16:00:00Z'); // AV start at confirmed hour
+        // June 18, 2026 16:00 UTC was Alterac Valley (0). Today (June 19) it flipped to WSG (1) at 16:00 UTC.
+        const PVP_REF = new Date('2026-06-18T16:00:00Z'); 
         const PVP_MAPS = [
-            { name: 'Alterac Valley',   released: true },
-            { name: 'Warsong Gulch',    released: true },
-            { name: 'Arathi Basin',     released: true },
-            { name: 'Blood Ring Arena', released: false },
-            { name: 'Thorn Gorge',      released: false }
+            { name: 'Alterac Valley',   released: false, img: '/assets/av.jpg' },
+            { name: 'Warsong Gulch',    released: true,  img: '/assets/wsg.jpg' },
+            { name: 'Arathi Basin',     released: true,  img: '/assets/ab.jpg' },
+            { name: 'Blood Ring Arena', released: false, img: 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=800&q=80' },
+            { name: 'Thorn Gorge',      released: false, img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80' }
         ];
+
+        const DMF_IMGS = {
+            Goldshire: '/assets/dmf%20goldshire.jpg',
+            'Thunder Bluff': '/assets/dmf%20thunderbluff.png',
+            Off: '/assets/dmf%20goldshire.jpg'
+        };
 
         const DMF_REF = new Date('2026-06-16T00:00:00Z');
 
@@ -496,9 +524,9 @@
             const utcDay = now.getUTCDay();
             const utcH = now.getUTCHours();
             const inOff = (utcDay === 2 && utcH >= 18) || (utcDay === 3 && utcH < 18);
-            if (inOff) return { text: 'Off Day', isOff: true };
+            if (inOff) return { text: 'Off Day', loc: 'Off', isOff: true };
             const info = getDMFInfo(now);
-            return { text: info.loc, isOff: false };
+            return { text: info.loc, loc: info.loc, isOff: false };
         }
 
         function nextDMFStateChange() {
@@ -579,22 +607,47 @@
             const dmfStatus = currentDMFStatus();
             const dmfLocEl = document.getElementById('dmf-current-loc');
             const dmfDotEl = document.getElementById('dmf-dot');
+            const dmfImgEl = document.getElementById('img-dmf');
+            
             if (dmfStatus.isOff) {
                 dmfLocEl.textContent = 'Off Day';
                 dmfLocEl.className = 'text-red-400/60 text-[12px] font-medium';
                 dmfDotEl.className = 'w-1.5 h-1.5 rounded-full bg-red-400/60 pulse';
             } else {
                 dmfLocEl.textContent = 'Currently: ' + dmfStatus.text;
-                dmfLocEl.className = 'text-w-gold-l text-[12px] font-medium';
+                dmfLocEl.className = 'text-amber-400 text-[12px] font-medium';
                 dmfDotEl.className = 'w-1.5 h-1.5 rounded-full bg-w-gold pulse';
             }
+            dmfImgEl.src = DMF_IMGS[dmfStatus.loc] || DMF_IMGS.Off;
 
             setDig('timer-pvp', diff(nextPvPReset()), false);
 
             const curIdx = currentPvPIndex();
+            const curMap = PVP_MAPS[curIdx];
             const nextIdx = pvpIndexForDate(nextPvPReset());
-            document.getElementById('pvp-current-bg').textContent = 'Now: ' + PVP_MAPS[curIdx].name;
+            
+            const pvpLocEl = document.getElementById('pvp-current-bg');
+            pvpLocEl.textContent = 'Now: ' + curMap.name;
             document.getElementById('pvp-next-name').textContent = 'Next: ' + PVP_MAPS[nextIdx].name;
+            
+            const pvpImg = document.getElementById('img-pvp');
+            const pvpOverlay = document.getElementById('pvp-locked-overlay');
+            const pvpDot = document.getElementById('pvp-dot');
+
+            pvpImg.src = curMap.img;
+            if (!curMap.released) {
+                pvpOverlay.classList.remove('hidden');
+                pvpImg.style.filter = 'grayscale(100%) brightness(0.4)';
+                pvpImg.style.opacity = '0.4';
+                pvpDot.className = 'w-1.5 h-1.5 rounded-full bg-red-400 pulse';
+                pvpLocEl.className = 'text-red-400/60 text-[12px] font-medium';
+            } else {
+                pvpOverlay.classList.add('hidden');
+                pvpImg.style.filter = 'none';
+                pvpImg.style.opacity = '0.25';
+                pvpDot.className = 'w-1.5 h-1.5 rounded-full bg-blue-400 pulse';
+                pvpLocEl.className = 'text-amber-400 text-[12px] font-medium';
+            }
         }
 
         function tickClock() {
