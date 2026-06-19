@@ -37,7 +37,13 @@
         .font-cinzel { font-family: 'Cinzel', serif; }
         .timer-digit {
             background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
-            border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; min-width: 52px; padding: 8px 6px; text-align: center;
+            border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; 
+            min-width: 38px; padding: 6px 4px; text-align: center; flex: 1;
+        }
+        @media (min-width: 1536px) { /* 2xl breakpoint */
+            .timer-digit {
+                min-width: 52px; padding: 8px 6px; flex: auto;
+            }
         }
         .timer-card { position: relative; overflow: hidden; transition: all 0.3s ease; border-radius: 12px; }
         .timer-card:hover { transform: translateY(-2px); }
@@ -46,10 +52,15 @@
         .timer-card.glow-purple::after { background: linear-gradient(90deg, transparent, rgba(160,100,220,0.6), transparent); }
         .timer-card.glow-gold::after { background: linear-gradient(90deg, transparent, rgba(200,168,78,0.6), transparent); }
         .timer-card.glow-blue::after { background: linear-gradient(90deg, transparent, rgba(80,140,220,0.6), transparent); }
+        .timer-card.glow-teal::after { background: linear-gradient(90deg, transparent, rgba(80,200,180,0.6), transparent); }
+        
         .timer-card.glow-red:hover { box-shadow: 0 8px 32px rgba(200,80,80,0.12); }
         .timer-card.glow-purple:hover { box-shadow: 0 8px 32px rgba(160,100,220,0.12); }
         .timer-card.glow-gold:hover { box-shadow: 0 8px 32px rgba(200,168,78,0.12); }
         .timer-card.glow-blue:hover { box-shadow: 0 8px 32px rgba(80,140,220,0.12); }
+        .timer-card.glow-teal:hover { box-shadow: 0 8px 32px rgba(80,200,180,0.12); }
+
+        .bg-honor { background: radial-gradient(ellipse at 50% 0%, rgba(80,200,180,0.14) 0%, transparent 55%), linear-gradient(180deg, #050f0d 0%, #081a18 50%, #0a0a0f 100%); }
 
         .locked-card { background: linear-gradient(180deg, #0c0c10 0%, #0f0f14 50%, #0a0a0e 100%); border: 1px dashed rgba(255,255,255,0.06); border-radius: 12px; transition: border-color 0.3s; }
         .locked-card:hover { border-color: rgba(255,255,255,0.1); }
@@ -125,113 +136,144 @@
     </div>
 
     <!-- ====== MAIN ====== -->
-    <main class="max-w-[1600px] mx-auto px-6 sm:px-8 py-8 flex-1 w-full">
+    <main class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
 
         <!-- Active Timer Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-4 sm:gap-5 mb-6">
+            
             <!-- Molten Core 40 -->
-            <div class="timer-card glow-red border border-w-border/40 h-64 relative">
-                <img src="/assets/mc.jpg" alt="Molten Core" class="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none">
-                <div class="absolute inset-0 bg-gradient-to-t from-w-dark via-w-dark/80 to-transparent z-[1]"></div>
-                <div class="relative z-[2] flex flex-col justify-between h-full p-6">
+            <div class="timer-card glow-red border border-w-border/40 min-h-[220px] sm:min-h-[240px] 2xl:min-h-[256px] relative">
+                <img src="https://jhinzuo2.github.io/capycraft-timers/assets/mc.jpg" alt="Molten Core" class="absolute inset-0 w-full h-full object-cover opacity-35 pointer-events-none">
+                <div class="absolute inset-0 bg-gradient-to-t from-w-dark/90 via-w-dark/60 to-transparent z-[1]"></div>
+                <div class="relative z-[2] flex flex-col justify-between h-full p-5 sm:p-6">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
-                            <span class="iconify w-5 h-5 text-red-400" data-icon="mdi:fire"></span>
-                            <h3 class="font-cinzel text-red-400 text-[15px] font-semibold tracking-wider uppercase">Molten Core</h3>
+                            <span class="iconify w-4 h-4 sm:w-5 sm:h-5 text-red-400" data-icon="mdi:fire"></span>
+                            <h3 class="font-cinzel text-red-400 text-sm sm:text-base 2xl:text-[15px] font-semibold tracking-wider uppercase">Molten Core</h3>
                         </div>
-                        <p class="text-w-dim text-[11px] ml-7">40-man Raid · 7-day lockout</p>
+                        <p class="text-w-dim text-[10px] sm:text-[11px] ml-6 sm:ml-7">40-man Raid · 7-day lockout</p>
                     </div>
-                    <div class="flex gap-2" id="timer-mc">
-                        <div class="timer-digit"><span class="text-red-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">DAYS</div></div>
-                        <div class="timer-digit"><span class="text-red-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">HRS</div></div>
-                        <div class="timer-digit"><span class="text-red-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">MIN</div></div>
-                        <div class="timer-digit"><span class="text-red-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">SEC</div></div>
+                    <div class="flex gap-1.5 sm:gap-2" id="timer-mc">
+                        <div class="timer-digit"><span class="text-red-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">DAYS</div></div>
+                        <div class="timer-digit"><span class="text-red-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">HRS</div></div>
+                        <div class="timer-digit"><span class="text-red-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">MIN</div></div>
+                        <div class="timer-digit"><span class="text-red-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">SEC</div></div>
                     </div>
                 </div>
             </div>
 
             <!-- Onyxia's Lair -->
-            <div class="timer-card glow-purple border border-w-border/40 h-64 relative">
-                <img src="/assets/onyxia.png" alt="Onyxia" class="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none">
-                <div class="absolute inset-0 bg-gradient-to-t from-w-dark via-w-dark/80 to-transparent z-[1]"></div>
-                <div class="relative z-[2] flex flex-col justify-between h-full p-6">
+            <div class="timer-card glow-purple border border-w-border/40 min-h-[220px] sm:min-h-[240px] 2xl:min-h-[256px] relative">
+                <img src="https://jhinzuo2.github.io/capycraft-timers/assets/onyxia.png" alt="Onyxia" class="absolute inset-0 w-full h-full object-cover opacity-35 pointer-events-none">
+                <div class="absolute inset-0 bg-gradient-to-t from-w-dark/90 via-w-dark/60 to-transparent z-[1]"></div>
+                <div class="relative z-[2] flex flex-col justify-between h-full p-5 sm:p-6">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
-                            <span class="iconify w-5 h-5 text-purple-400" data-icon="mdi:dragon"></span>
-                            <h3 class="font-cinzel text-purple-400 text-[15px] font-semibold tracking-wider uppercase">Onyxia's Lair</h3>
+                            <span class="iconify w-4 h-4 sm:w-5 sm:h-5 text-purple-400" data-icon="mdi:dragon"></span>
+                            <h3 class="font-cinzel text-purple-400 text-sm sm:text-base 2xl:text-[15px] font-semibold tracking-wider uppercase">Onyxia's Lair</h3>
                         </div>
-                        <p class="text-w-dim text-[11px] ml-7">Raid · 5-day lockout</p>
+                        <p class="text-w-dim text-[10px] sm:text-[11px] ml-6 sm:ml-7">Raid · 5-day lockout</p>
                     </div>
-                    <div class="flex gap-2" id="timer-onyxia">
-                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">DAYS</div></div>
-                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">HRS</div></div>
-                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">MIN</div></div>
-                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">SEC</div></div>
+                    <div class="flex gap-1.5 sm:gap-2" id="timer-onyxia">
+                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">DAYS</div></div>
+                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">HRS</div></div>
+                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">MIN</div></div>
+                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">SEC</div></div>
                     </div>
                 </div>
             </div>
 
             <!-- Darkmoon Faire -->
-            <div class="timer-card glow-gold border border-w-border/40 h-64 relative">
-                <img id="img-dmf" src="/assets/dmf%20goldshire.jpg" alt="Darkmoon Faire" class="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none transition-all duration-700">
-                <div class="absolute inset-0 bg-gradient-to-t from-w-dark via-w-dark/80 to-transparent z-[1]"></div>
-                <div class="relative z-[2] flex flex-col justify-between h-full p-6">
+            <div class="timer-card glow-gold border border-w-border/40 min-h-[220px] sm:min-h-[240px] 2xl:min-h-[256px] relative">
+                <img id="img-dmf" src="https://jhinzuo2.github.io/capycraft-timers/assets/dmf%20goldshire.jpg" alt="Darkmoon Faire" class="absolute inset-0 w-full h-full object-cover opacity-35 pointer-events-none transition-all duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-w-dark/90 via-w-dark/60 to-transparent z-[1]"></div>
+                <div class="relative z-[2] flex flex-col justify-between h-full p-5 sm:p-6">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
-                            <span class="iconify w-5 h-5 text-w-gold" data-icon="mdi:tent"></span>
-                            <h3 class="font-cinzel text-w-gold text-[15px] font-semibold tracking-wider uppercase">Darkmoon Faire</h3>
+                            <span class="iconify w-4 h-4 sm:w-5 sm:h-5 text-w-gold" data-icon="mdi:tent"></span>
+                            <h3 class="font-cinzel text-w-gold text-sm sm:text-base 2xl:text-[15px] font-semibold tracking-wider uppercase">Darkmoon Faire</h3>
                         </div>
-                        <p class="text-w-dim text-[11px] ml-7">Weekly rotation · Off Wed 02:00 server</p>
-                        <div class="flex items-center gap-1.5 ml-7 mt-1.5">
-                            <span class="w-1.5 h-1.5 rounded-full bg-w-gold pulse" id="dmf-dot"></span>
-                            <span class="text-amber-400 text-[12px] font-medium" id="dmf-current-loc">—</span>
+                        <p class="text-w-dim text-[10px] sm:text-[11px] ml-6 sm:ml-7">Weekly rotation · Off Wed 02:00 server</p>
+                        <div class="flex items-center gap-1.5 ml-6 sm:ml-7 mt-2 h-5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-w-gold pulse flex-shrink-0" id="dmf-dot"></span>
+                            <span class="text-amber-400 text-[11px] sm:text-[12px] font-medium leading-none" id="dmf-current-loc">—</span>
                         </div>
                     </div>
                     <div>
-                        <p class="text-[10px] text-w-gold/50 mb-2" id="dmf-timer-label">—</p>
-                        <div class="flex gap-2" id="timer-dmf">
-                            <div class="timer-digit"><span class="text-yellow-200 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">DAYS</div></div>
-                            <div class="timer-digit"><span class="text-yellow-200 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">HRS</div></div>
-                            <div class="timer-digit"><span class="text-yellow-200 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">MIN</div></div>
-                            <div class="timer-digit"><span class="text-yellow-200 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">SEC</div></div>
+                        <p class="text-[9px] sm:text-[10px] text-w-gold/50 mb-1.5 sm:mb-2 h-4" id="dmf-timer-label">—</p>
+                        <div class="flex gap-1.5 sm:gap-2" id="timer-dmf">
+                            <div class="timer-digit"><span class="text-yellow-200 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">DAYS</div></div>
+                            <div class="timer-digit"><span class="text-yellow-200 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">HRS</div></div>
+                            <div class="timer-digit"><span class="text-yellow-200 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">MIN</div></div>
+                            <div class="timer-digit"><span class="text-yellow-200 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">SEC</div></div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- PvP Daily -->
-            <div class="timer-card glow-blue border border-w-border/40 h-64 relative">
-                <img id="img-pvp" src="/assets/av.jpg" alt="Battleground" class="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none transition-all duration-700">
-                <div class="absolute inset-0 bg-gradient-to-t from-w-dark via-w-dark/80 to-transparent z-[1]"></div>
+            <div class="timer-card glow-blue border border-w-border/40 min-h-[220px] sm:min-h-[240px] 2xl:min-h-[256px] relative">
+                <img id="img-pvp" src="https://jhinzuo2.github.io/capycraft-timers/assets/wsg.jpg" alt="Battleground" class="absolute inset-0 w-full h-full object-cover opacity-35 pointer-events-none transition-all duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-w-dark/90 via-w-dark/60 to-transparent z-[1]"></div>
                 <!-- Locked Overlay -->
-                <div id="pvp-locked-overlay" class="absolute inset-0 z-[2] bg-w-dark/40 backdrop-blur-[2px] hidden transition-all">
+                <div id="pvp-locked-overlay" class="absolute inset-0 z-[2] bg-w-dark/30 backdrop-blur-[2px] hidden transition-all">
                     <div class="flex items-center justify-center h-full">
                         <span class="not-released-tag text-xs px-3 py-1"><span class="iconify w-3 h-3" data-icon="mdi:lock-outline"></span>Not Released</span>
                     </div>
                 </div>
 
-                <div class="relative z-[3] flex flex-col justify-between h-full p-6">
+                <div class="relative z-[3] flex flex-col justify-between h-full p-5 sm:p-6">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
-                            <span class="iconify w-5 h-5 text-blue-400" data-icon="mdi:sword-cross"></span>
-                            <h3 class="font-cinzel text-blue-400 text-[15px] font-semibold tracking-wider uppercase">PvP Daily</h3>
+                            <span class="iconify w-4 h-4 sm:w-5 sm:h-5 text-blue-400" data-icon="mdi:sword-cross"></span>
+                            <h3 class="font-cinzel text-blue-400 text-sm sm:text-base 2xl:text-[15px] font-semibold tracking-wider uppercase">PvP Daily</h3>
                         </div>
-                        <p class="text-w-dim text-[11px] ml-7">Battleground rotation</p>
-                        <div class="flex items-center gap-1.5 ml-7 mt-1.5">
-                            <span class="w-1.5 h-1.5 rounded-full bg-blue-400 pulse" id="pvp-dot"></span>
-                            <span class="text-amber-400 text-[12px] font-medium" id="pvp-current-bg">—</span>
+                        <p class="text-w-dim text-[10px] sm:text-[11px] ml-6 sm:ml-7">Battleground rotation</p>
+                        <div class="flex items-center gap-1.5 ml-6 sm:ml-7 mt-2 h-5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-blue-400 pulse flex-shrink-0" id="pvp-dot"></span>
+                            <span class="text-amber-400 text-[11px] sm:text-[12px] font-medium leading-none" id="pvp-current-bg">—</span>
                         </div>
                     </div>
                     <div>
-                        <p class="text-[10px] text-blue-400/50 mb-2" id="pvp-next-name">—</p>
-                        <div class="flex gap-2" id="timer-pvp">
-                            <div class="timer-digit"><span class="text-blue-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">HRS</div></div>
-                            <div class="timer-digit"><span class="text-blue-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">MIN</div></div>
-                            <div class="timer-digit"><span class="text-blue-300 font-semibold text-xl font-inter">--</span><div class="text-w-dim text-[10px] uppercase mt-1">SEC</div></div>
+                        <p class="text-[9px] sm:text-[10px] text-blue-400/50 mb-1.5 sm:mb-2 h-4" id="pvp-next-name">—</p>
+                        <!-- Centered Timer -->
+                        <div class="flex gap-1.5 sm:gap-2 justify-center" id="timer-pvp">
+                            <div class="timer-digit"><span class="text-blue-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">HRS</div></div>
+                            <div class="timer-digit"><span class="text-blue-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">MIN</div></div>
+                            <div class="timer-digit"><span class="text-blue-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">SEC</div></div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Honor Reset -->
+            <div class="timer-card glow-teal bg-honor border border-w-border/40 min-h-[220px] sm:min-h-[240px] 2xl:min-h-[256px] relative">
+                <img src="https://jhinzuo2.github.io/capycraft-timers/assets/honorreset.jpg" alt="Honor Reset" class="absolute inset-0 w-full h-full object-cover opacity-35 pointer-events-none">
+                <div class="absolute inset-0 bg-gradient-to-t from-w-dark/90 via-w-dark/60 to-transparent z-[1]"></div>
+                <div class="relative z-[2] flex flex-col justify-between h-full p-5 sm:p-6">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="iconify w-4 h-4 sm:w-5 sm:h-5 text-teal-400" data-icon="mdi:shield-star"></span>
+                            <h3 class="font-cinzel text-teal-400 text-sm sm:text-base 2xl:text-[15px] font-semibold tracking-wider uppercase">Honor Reset</h3>
+                        </div>
+                        <p class="text-w-dim text-[10px] sm:text-[11px] ml-6 sm:ml-7">Weekly PvP · Wed 02:00 server</p>
+                        <div class="flex items-center gap-1.5 ml-6 sm:ml-7 mt-2 h-5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-teal-400 pulse flex-shrink-0" id="honor-dot"></span>
+                            <span class="text-amber-400 text-[11px] sm:text-[12px] font-medium leading-none">Weekly Reset</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-[9px] sm:text-[10px] text-teal-400/50 mb-1.5 sm:mb-2 h-4" id="honor-timer-label">—</p>
+                        <div class="flex gap-1.5 sm:gap-2" id="timer-honor">
+                            <div class="timer-digit"><span class="text-teal-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">DAYS</div></div>
+                            <div class="timer-digit"><span class="text-teal-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">HRS</div></div>
+                            <div class="timer-digit"><span class="text-teal-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">MIN</div></div>
+                            <div class="timer-digit"><span class="text-teal-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">SEC</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- Not Released Section -->
@@ -242,17 +284,17 @@
             </div>
 
             <!-- Locked Timer Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 mb-4">
                 <!-- Edge of Madness -->
-                <div class="locked-timer-card h-64">
-                    <div class="flex flex-col justify-between h-full p-6">
+                <div class="locked-timer-card min-h-[220px] sm:min-h-[240px] 2xl:min-h-[256px]">
+                    <div class="flex flex-col justify-between h-full p-5 sm:p-6">
                         <div>
                             <div class="flex items-center gap-2 mb-1">
-                                <span class="iconify w-5 h-5 text-w-dim/50" data-icon="mdi:skull-outline"></span>
-                                <h3 class="font-cinzel text-w-dim/60 text-[15px] font-semibold tracking-wider uppercase">Edge of Madness</h3>
+                                <span class="iconify w-4 h-4 sm:w-5 sm:h-5 text-w-dim/50" data-icon="mdi:skull-outline"></span>
+                                <h3 class="font-cinzel text-w-dim/60 text-sm sm:text-base 2xl:text-[15px] font-semibold tracking-wider uppercase">Edge of Madness</h3>
                             </div>
-                            <p class="text-w-dim/40 text-[11px] ml-7">Zul'Gurub Boss Rotation · ~2 week cycle</p>
-                            <div class="ml-7 mt-3 flex flex-wrap gap-2">
+                            <p class="text-w-dim/40 text-[10px] sm:text-[11px] ml-6 sm:ml-7">Zul'Gurub Boss Rotation · ~2 week cycle</p>
+                            <div class="ml-6 sm:ml-7 mt-3 flex flex-wrap gap-2">
                                 <span class="text-[10px] px-2.5 py-1 bg-w-border/15 rounded text-w-dim/40 border border-w-border/10">Gri'lek</span>
                                 <span class="text-[10px] px-2.5 py-1 bg-w-border/15 rounded text-w-dim/40 border border-w-border/10">Renataki</span>
                                 <span class="text-[10px] px-2.5 py-1 bg-w-border/15 rounded text-w-dim/40 border border-w-border/10">Hazza'rah</span>
@@ -267,15 +309,15 @@
                 </div>
 
                 <!-- Weekly Quest Reset -->
-                <div class="locked-timer-card h-64">
-                    <div class="flex flex-col justify-between h-full p-6">
+                <div class="locked-timer-card min-h-[220px] sm:min-h-[240px] 2xl:min-h-[256px]">
+                    <div class="flex flex-col justify-between h-full p-5 sm:p-6">
                         <div>
                             <div class="flex items-center gap-2 mb-1">
-                                <span class="iconify w-5 h-5 text-w-dim/50" data-icon="mdi:calendar-refresh"></span>
-                                <h3 class="font-cinzel text-w-dim/60 text-[15px] font-semibold tracking-wider uppercase">Weekly Quest Reset</h3>
+                                <span class="iconify w-4 h-4 sm:w-5 sm:h-5 text-w-dim/50" data-icon="mdi:calendar-refresh"></span>
+                                <h3 class="font-cinzel text-w-dim/60 text-sm sm:text-base 2xl:text-[15px] font-semibold tracking-wider uppercase">Weekly Quest Reset</h3>
                             </div>
-                            <p class="text-w-dim/40 text-[11px] ml-7">Resets with raid lockout · 7-day cycle</p>
-                            <p class="text-w-dim/25 text-[10px] ml-7 mt-2 italic">Same reset window as Molten Core (04:00 UTC)</p>
+                            <p class="text-w-dim/40 text-[10px] sm:text-[11px] ml-6 sm:ml-7">Resets with raid lockout · 7-day cycle</p>
+                            <p class="text-w-dim/25 text-[10px] ml-6 sm:ml-7 mt-2 italic">Same reset window as Molten Core (04:00 UTC)</p>
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="iconify w-4 h-4 text-w-dim/30" data-icon="mdi:lock-outline"></span>
@@ -288,8 +330,8 @@
             <!-- Smaller Locked Info Cards -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <!-- Raid 20 -->
-                <div class="locked-card p-5 flex items-center gap-4">
-                    <span class="iconify w-7 h-7 text-w-dim/40 flex-shrink-0" data-icon="mdi:lock-outline"></span>
+                <div class="locked-card p-4 sm:p-5 flex items-center gap-4">
+                    <span class="iconify w-6 h-6 sm:w-7 sm:h-7 text-w-dim/40 flex-shrink-0" data-icon="mdi:lock-outline"></span>
                     <div>
                         <h3 class="font-cinzel text-w-dim/60 text-xs font-semibold tracking-wider uppercase">Raid 20</h3>
                         <p class="text-w-dim/40 text-[10px] mt-0.5">Zul'Gurub & Ruins of Ahn'Qiraj</p>
@@ -297,16 +339,16 @@
                     </div>
                 </div>
                 <!-- Karazhan -->
-                <div class="locked-card p-5 flex items-center gap-4">
-                    <span class="iconify w-7 h-7 text-w-dim/40 flex-shrink-0" data-icon="mdi:lock-outline"></span>
+                <div class="locked-card p-4 sm:p-5 flex items-center gap-4">
+                    <span class="iconify w-6 h-6 sm:w-7 sm:h-7 text-w-dim/40 flex-shrink-0" data-icon="mdi:lock-outline"></span>
                     <div>
                         <h3 class="font-cinzel text-w-dim/60 text-xs font-semibold tracking-wider uppercase">Karazhan</h3>
                         <p class="text-w-dim/30 text-[10px] mt-0.5">Lower Karazhan Halls (K10)</p>
                     </div>
                 </div>
                 <!-- Timbermaw Hold -->
-                <div class="locked-card p-5 flex items-center gap-4">
-                    <span class="iconify w-7 h-7 text-w-dim/40 flex-shrink-0" data-icon="mdi:lock-outline"></span>
+                <div class="locked-card p-4 sm:p-5 flex items-center gap-4">
+                    <span class="iconify w-6 h-6 sm:w-7 sm:h-7 text-w-dim/40 flex-shrink-0" data-icon="mdi:lock-outline"></span>
                     <div>
                         <h3 class="font-cinzel text-w-dim/60 text-xs font-semibold tracking-wider uppercase">Timbermaw Hold</h3>
                         <p class="text-w-dim/30 text-[10px] mt-0.5">No timer available</p>
@@ -350,8 +392,8 @@
                     </table>
                 </div>
                 <div class="px-4 py-2 border-t border-w-border/20 flex items-start gap-1.5">
-                    <span class="iconify w-3 h-3 text-yellow-600/60 mt-0.5 flex-shrink-0" data-icon="mdi:alert-circle-outline"></span>
-                    <span class="text-[9px] text-yellow-600/60 italic leading-relaxed">Alternates weekly between Goldshire & Thunder Bluff. Off day is Wednesday (server time, UTC+8), starting 02:00. Exact date↔location alignment still needs in-game confirmation.</span>
+                    <span class="iconify w-3 h-3 text-amber-400/70 mt-0.5 flex-shrink-0" data-icon="mdi:alert-circle-outline"></span>
+                    <span class="text-[10px] text-amber-400/70 italic leading-relaxed">Alternates weekly between Goldshire & Thunder Bluff. Off day is Wednesday (server time, UTC+8), starting 02:00.</span>
                 </div>
             </div>
 
@@ -386,8 +428,8 @@
                     </table>
                 </div>
                 <div class="px-4 py-2 border-t border-w-border/20 flex items-center gap-1.5">
-                    <span class="iconify w-3 h-3 text-w-dim/50" data-icon="mdi:check-circle-outline"></span>
-                    <span class="text-[9px] text-w-dim/50">Resets daily at 16:00 UTC (18:00 CEST / 00:00 Server).</span>
+                    <span class="iconify w-3 h-3 text-amber-400/70 flex-shrink-0" data-icon="mdi:check-circle-outline"></span>
+                    <span class="text-[10px] text-amber-400/70 italic leading-relaxed">Resets daily at 16:00 UTC (18:00 CEST / 00:00 Server).</span>
                 </div>
             </div>
         </div>
@@ -421,9 +463,10 @@
                 <div>
                     <div class="reset-row"><span class="text-[10px] text-w-dim">Raids</span><span class="text-[10px] font-inter font-medium text-w-bright" id="reset-raid">--:-- UTC</span></div>
                     <div class="reset-row"><span class="text-[10px] text-w-dim">PvP BG</span><span class="text-[10px] font-inter font-medium text-w-bright" id="reset-pvp">--:-- UTC</span></div>
+                    <div class="reset-row"><span class="text-[10px] text-w-dim">Honor*</span><span class="text-[10px] font-inter font-medium text-w-bright" id="reset-honor">--:-- UTC</span></div>
                     <div class="reset-row"><span class="text-[10px] text-w-dim">DMF</span><span class="text-[10px] font-inter font-medium text-w-bright">Wed 02:00 server · Off Day</span></div>
-                    <div class="reset-row"><span class="text-[10px] text-w-dim">Honor</span><span class="text-[10px] font-inter font-medium text-w-dim/50 italic">TBD</span></div>
                 </div>
+                <div class="text-[8px] text-w-dim/30 mt-2 italic">* Honor reset hour needs in-game confirmation.</div>
             </div>
         </div>
 
@@ -431,7 +474,7 @@
 
     <!-- ====== FOOTER ====== -->
     <footer class="border-t border-w-border/20 py-5 mt-auto">
-        <div class="max-w-[1600px] mx-auto px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
+        <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
             <div class="text-w-dim/60 text-[11px] text-center sm:text-left">
                 © 2026 <a href="https://capycraft.io" class="text-w-gold/60 hover:text-w-gold transition-colors">CapyCraft</a> — Server runs UTC+8 · Countdowns accurate for all timezones
             </div>
@@ -476,7 +519,6 @@
             return new Date(d.getTime() + SERVER_OFFSET_MIN * 60000);
         }
 
-        // Anchored to the correct year of 2026
         const RAID_RESET_H = 4; // 04:00 UTC
         const MC_NEXT_RESET  = new Date('2026-06-21T04:00:00Z');
         const ONY_NEXT_RESET = new Date('2026-06-21T04:00:00Z');
@@ -484,20 +526,23 @@
         const ONY_REF = new Date(ONY_NEXT_RESET.getTime() - 5 * 864e5);
 
         const PVP_RESET_H = 16; // CONFIRMED: 16:00 UTC = 18:00 CEST = 00:00 Server
-        // June 18, 2026 16:00 UTC was Alterac Valley (0). Today (June 19) it flipped to WSG (1) at 16:00 UTC.
         const PVP_REF = new Date('2026-06-18T16:00:00Z'); 
         const PVP_MAPS = [
-            { name: 'Alterac Valley',   released: false, img: '/assets/av.jpg' },
-            { name: 'Warsong Gulch',    released: true,  img: '/assets/wsg.jpg' },
-            { name: 'Arathi Basin',     released: true,  img: '/assets/ab.jpg' },
+            { name: 'Alterac Valley',   released: false, img: 'https://jhinzuo2.github.io/capycraft-timers/assets/av.jpg' },
+            { name: 'Warsong Gulch',    released: true,  img: 'https://jhinzuo2.github.io/capycraft-timers/assets/wsg.jpg' },
+            { name: 'Arathi Basin',     released: true,  img: 'https://jhinzuo2.github.io/capycraft-timers/assets/ab.jpg' },
             { name: 'Blood Ring Arena', released: false, img: 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=800&q=80' },
             { name: 'Thorn Gorge',      released: false, img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80' }
         ];
 
+        // Honor: Wednesday 02:00 Server (UTC+8) = Tuesday 18:00 UTC
+        const HONOR_RESET_UTC_H = 18; 
+        const HONOR_REF = new Date('2026-06-16T18:00:00Z'); // A recent Tuesday 18:00 UTC
+
         const DMF_IMGS = {
-            Goldshire: '/assets/dmf%20goldshire.jpg',
-            'Thunder Bluff': '/assets/dmf%20thunderbluff.png',
-            Off: '/assets/dmf%20goldshire.jpg'
+            Goldshire: 'https://jhinzuo2.github.io/capycraft-timers/assets/dmf%20goldshire.jpg',
+            'Thunder Bluff': 'https://jhinzuo2.github.io/capycraft-timers/assets/dmf%20thunderbluff.png',
+            Off: 'https://jhinzuo2.github.io/capycraft-timers/assets/dmf%20goldshire.jpg'
         };
 
         const DMF_REF = new Date('2026-06-16T00:00:00Z');
@@ -610,13 +655,13 @@
             const dmfImgEl = document.getElementById('img-dmf');
             
             if (dmfStatus.isOff) {
-                dmfLocEl.textContent = 'Off Day';
-                dmfLocEl.className = 'text-red-400/60 text-[12px] font-medium';
-                dmfDotEl.className = 'w-1.5 h-1.5 rounded-full bg-red-400/60 pulse';
+                dmfLocEl.textContent = 'Now: Off Day';
+                dmfLocEl.className = 'text-red-400/60 text-[11px] sm:text-[12px] font-medium leading-none';
+                dmfDotEl.className = 'w-1.5 h-1.5 rounded-full bg-red-400/60 pulse flex-shrink-0';
             } else {
-                dmfLocEl.textContent = 'Currently: ' + dmfStatus.text;
-                dmfLocEl.className = 'text-amber-400 text-[12px] font-medium';
-                dmfDotEl.className = 'w-1.5 h-1.5 rounded-full bg-w-gold pulse';
+                dmfLocEl.textContent = 'Now: ' + dmfStatus.text;
+                dmfLocEl.className = 'text-amber-400 text-[11px] sm:text-[12px] font-medium leading-none';
+                dmfDotEl.className = 'w-1.5 h-1.5 rounded-full bg-w-gold pulse flex-shrink-0';
             }
             dmfImgEl.src = DMF_IMGS[dmfStatus.loc] || DMF_IMGS.Off;
 
@@ -637,17 +682,20 @@
             pvpImg.src = curMap.img;
             if (!curMap.released) {
                 pvpOverlay.classList.remove('hidden');
-                pvpImg.style.filter = 'grayscale(100%) brightness(0.4)';
-                pvpImg.style.opacity = '0.4';
-                pvpDot.className = 'w-1.5 h-1.5 rounded-full bg-red-400 pulse';
-                pvpLocEl.className = 'text-red-400/60 text-[12px] font-medium';
+                pvpImg.style.filter = 'grayscale(100%) brightness(0.5)';
+                pvpImg.style.opacity = '0.3';
+                pvpDot.className = 'w-1.5 h-1.5 rounded-full bg-red-400 pulse flex-shrink-0';
+                pvpLocEl.className = 'text-red-400/60 text-[11px] sm:text-[12px] font-medium leading-none';
             } else {
                 pvpOverlay.classList.add('hidden');
                 pvpImg.style.filter = 'none';
-                pvpImg.style.opacity = '0.25';
-                pvpDot.className = 'w-1.5 h-1.5 rounded-full bg-blue-400 pulse';
-                pvpLocEl.className = 'text-amber-400 text-[12px] font-medium';
+                pvpImg.style.opacity = '0.35';
+                pvpDot.className = 'w-1.5 h-1.5 rounded-full bg-blue-400 pulse flex-shrink-0';
+                pvpLocEl.className = 'text-amber-400 text-[11px] sm:text-[12px] font-medium leading-none';
             }
+
+            // Honor Reset Timer
+            setDig('timer-honor', diff(nextPeriodic(HONOR_REF, 168)), true);
         }
 
         function tickClock() {
@@ -666,6 +714,7 @@
 
             document.getElementById('reset-raid').textContent = `${pad(RAID_RESET_H)}:00 UTC · ${utcHourToLocal(RAID_RESET_H)} local`;
             document.getElementById('reset-pvp').textContent  = `${pad(PVP_RESET_H)}:00 UTC · ${utcHourToLocal(PVP_RESET_H)} local`;
+            document.getElementById('reset-honor').textContent  = `${pad(HONOR_RESET_UTC_H)}:00 UTC (Wed 02:00 Srv)*`;
         }
 
         function badge(i, isOff) {
