@@ -53,12 +53,14 @@
         .timer-card.glow-gold::after { background: linear-gradient(90deg, transparent, rgba(200,168,78,0.6), transparent); }
         .timer-card.glow-blue::after { background: linear-gradient(90deg, transparent, rgba(80,140,220,0.6), transparent); }
         .timer-card.glow-teal::after { background: linear-gradient(90deg, transparent, rgba(80,200,180,0.6), transparent); }
+        .timer-card.glow-green::after { background: linear-gradient(90deg, transparent, rgba(80,180,90,0.6), transparent); }
         
         .timer-card.glow-red:hover { box-shadow: 0 8px 32px rgba(200,80,80,0.12); }
         .timer-card.glow-purple:hover { box-shadow: 0 8px 32px rgba(160,100,220,0.12); }
         .timer-card.glow-gold:hover { box-shadow: 0 8px 32px rgba(200,168,78,0.12); }
         .timer-card.glow-blue:hover { box-shadow: 0 8px 32px rgba(80,140,220,0.12); }
         .timer-card.glow-teal:hover { box-shadow: 0 8px 32px rgba(80,200,180,0.12); }
+        .timer-card.glow-green:hover { box-shadow: 0 8px 32px rgba(80,180,90,0.12); }
 
         .bg-honor { background: radial-gradient(ellipse at 50% 0%, rgba(80,200,180,0.14) 0%, transparent 55%), linear-gradient(180deg, #050f0d 0%, #081a18 50%, #0a0a0f 100%); }
 
@@ -183,6 +185,48 @@
                 </div>
             </div>
 
+            <!-- Karazhan (K10 / Lower Karazhan Halls) -->
+            <div class="timer-card glow-blue border border-w-border/40 min-h-[220px] sm:min-h-[240px] 2xl:min-h-[256px] relative">
+                <img src="https://jhinzuo2.github.io/capycraft-timers/assets/k10.jpg" alt="Karazhan" class="absolute inset-0 w-full h-full object-cover opacity-35 pointer-events-none">
+                <div class="absolute inset-0 bg-gradient-to-t from-w-dark/90 via-w-dark/60 to-transparent z-[1]"></div>
+                <div class="relative z-[2] flex flex-col justify-between h-full p-5 sm:p-6">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="iconify w-4 h-4 sm:w-5 sm:h-5 text-indigo-400" data-icon="mdi:castle"></span>
+                            <h3 class="font-cinzel text-indigo-400 text-sm sm:text-base 2xl:text-[15px] font-semibold tracking-wider uppercase">Karazhan (K10)</h3>
+                        </div>
+                        <p class="text-w-text/70 text-[10px] sm:text-[11px] ml-6 sm:ml-7">Lower Karazhan Halls · 5-day lockout</p>
+                    </div>
+                    <div class="flex gap-1.5 sm:gap-2" id="timer-kara">
+                        <div class="timer-digit"><span class="text-indigo-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">DAYS</div></div>
+                        <div class="timer-digit"><span class="text-indigo-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">HRS</div></div>
+                        <div class="timer-digit"><span class="text-indigo-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">MIN</div></div>
+                        <div class="timer-digit"><span class="text-indigo-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">SEC</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Zul'Gurub -->
+            <div class="timer-card glow-green border border-w-border/40 min-h-[220px] sm:min-h-[240px] 2xl:min-h-[256px] relative">
+                <img src="https://jhinzuo2.github.io/capycraft-timers/assets/zg.jpg" alt="Zul'Gurub" class="absolute inset-0 w-full h-full object-cover opacity-35 pointer-events-none">
+                <div class="absolute inset-0 bg-gradient-to-t from-w-dark/90 via-w-dark/60 to-transparent z-[1]"></div>
+                <div class="relative z-[2] flex flex-col justify-between h-full p-5 sm:p-6">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="iconify w-4 h-4 sm:w-5 sm:h-5 text-green-400" data-icon="mdi:snake"></span>
+                            <h3 class="font-cinzel text-green-400 text-sm sm:text-base 2xl:text-[15px] font-semibold tracking-wider uppercase">Zul'Gurub</h3>
+                        </div>
+                        <p class="text-w-text/70 text-[10px] sm:text-[11px] ml-6 sm:ml-7">Raid 20 · 3-day lockout</p>
+                    </div>
+                    <div class="flex gap-1.5 sm:gap-2" id="timer-zg">
+                        <div class="timer-digit"><span class="text-green-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">DAYS</div></div>
+                        <div class="timer-digit"><span class="text-green-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">HRS</div></div>
+                        <div class="timer-digit"><span class="text-green-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">MIN</div></div>
+                        <div class="timer-digit"><span class="text-green-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">SEC</div></div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Darkmoon Faire -->
             <div class="timer-card glow-gold border border-w-border/40 min-h-[220px] sm:min-h-[240px] 2xl:min-h-[256px] relative">
                 <img id="img-dmf" src="https://jhinzuo2.github.io/capycraft-timers/assets/dmf%20goldshire.jpg" alt="Darkmoon Faire" class="absolute inset-0 w-full h-full object-cover opacity-35 pointer-events-none transition-all duration-700">
@@ -207,6 +251,31 @@
                             <div class="timer-digit"><span class="text-yellow-200 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">HRS</div></div>
                             <div class="timer-digit"><span class="text-yellow-200 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">MIN</div></div>
                             <div class="timer-digit"><span class="text-yellow-200 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">SEC</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Honor Reset -->
+            <div class="timer-card glow-teal bg-honor border border-w-border/40 min-h-[220px] sm:min-h-[240px] 2xl:min-h-[256px] relative">
+                <img src="https://jhinzuo2.github.io/capycraft-timers/assets/honorreset.jpg" alt="Honor Reset" class="absolute inset-0 w-full h-full object-cover opacity-35 pointer-events-none">
+                <div class="absolute inset-0 bg-gradient-to-t from-w-dark/90 via-w-dark/60 to-transparent z-[1]"></div>
+                <div class="relative z-[2] flex flex-col justify-between h-full p-5 sm:p-6">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="iconify w-4 h-4 sm:w-5 sm:h-5 text-teal-400" data-icon="mdi:shield-star"></span>
+                            <h3 class="font-cinzel text-teal-400 text-sm sm:text-base 2xl:text-[15px] font-semibold tracking-wider uppercase">Honor Reset</h3>
+                        </div>
+                        <!-- Updated text: Server Time -->
+                        <p class="text-w-text/70 text-[10px] sm:text-[11px] ml-6 sm:ml-7">Weekly PvP · Wed 02:00 Server Time</p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] sm:text-[10px] text-teal-300/60 mb-1.5 sm:mb-2 h-4">Weekly reset in:</p>
+                        <div class="flex gap-1.5 sm:gap-2" id="timer-honor">
+                            <div class="timer-digit"><span class="text-teal-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">DAYS</div></div>
+                            <div class="timer-digit"><span class="text-teal-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">HRS</div></div>
+                            <div class="timer-digit"><span class="text-teal-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">MIN</div></div>
+                            <div class="timer-digit"><span class="text-teal-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">SEC</div></div>
                         </div>
                     </div>
                 </div>
@@ -242,31 +311,6 @@
                             <div class="timer-digit"><span class="text-blue-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">HRS</div></div>
                             <div class="timer-digit"><span class="text-blue-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">MIN</div></div>
                             <div class="timer-digit"><span class="text-blue-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">SEC</div></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Honor Reset -->
-            <div class="timer-card glow-teal bg-honor border border-w-border/40 min-h-[220px] sm:min-h-[240px] 2xl:min-h-[256px] relative">
-                <img src="https://jhinzuo2.github.io/capycraft-timers/assets/honorreset.jpg" alt="Honor Reset" class="absolute inset-0 w-full h-full object-cover opacity-35 pointer-events-none">
-                <div class="absolute inset-0 bg-gradient-to-t from-w-dark/90 via-w-dark/60 to-transparent z-[1]"></div>
-                <div class="relative z-[2] flex flex-col justify-between h-full p-5 sm:p-6">
-                    <div>
-                        <div class="flex items-center gap-2 mb-1">
-                            <span class="iconify w-4 h-4 sm:w-5 sm:h-5 text-teal-400" data-icon="mdi:shield-star"></span>
-                            <h3 class="font-cinzel text-teal-400 text-sm sm:text-base 2xl:text-[15px] font-semibold tracking-wider uppercase">Honor Reset</h3>
-                        </div>
-                        <!-- Updated text: Server Time -->
-                        <p class="text-w-text/70 text-[10px] sm:text-[11px] ml-6 sm:ml-7">Weekly PvP · Wed 02:00 Server Time</p>
-                    </div>
-                    <div>
-                        <p class="text-[9px] sm:text-[10px] text-teal-300/60 mb-1.5 sm:mb-2 h-4">Weekly reset in:</p>
-                        <div class="flex gap-1.5 sm:gap-2" id="timer-honor">
-                            <div class="timer-digit"><span class="text-teal-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">DAYS</div></div>
-                            <div class="timer-digit"><span class="text-teal-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">HRS</div></div>
-                            <div class="timer-digit"><span class="text-teal-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">MIN</div></div>
-                            <div class="timer-digit"><span class="text-teal-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">SEC</div></div>
                         </div>
                     </div>
                 </div>
@@ -346,53 +390,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Recently Released Timer Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-4 sm:gap-5 mb-6">
-
-            <!-- Zul'Gurub -->
-            <div class="timer-card glow-purple border border-w-border/40 min-h-[220px] sm:min-h-[240px] 2xl:min-h-[256px] relative">
-                <div class="absolute inset-0 bg-gradient-to-t from-w-dark/90 via-w-dark/60 to-transparent z-[1]"></div>
-                <div class="relative z-[2] flex flex-col justify-between h-full p-5 sm:p-6">
-                    <div>
-                        <div class="flex items-center gap-2 mb-1">
-                            <span class="iconify w-4 h-4 sm:w-5 sm:h-5 text-purple-400" data-icon="mdi:snake"></span>
-                            <h3 class="font-cinzel text-purple-400 text-sm sm:text-base 2xl:text-[15px] font-semibold tracking-wider uppercase">Zul'Gurub</h3>
-                        </div>
-                        <p class="text-w-text/70 text-[10px] sm:text-[11px] ml-6 sm:ml-7">Raid 20 · 3-day lockout</p>
-                    </div>
-                    <div class="flex gap-1.5 sm:gap-2" id="timer-zg">
-                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">DAYS</div></div>
-                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">HRS</div></div>
-                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">MIN</div></div>
-                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">SEC</div></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Karazhan (K10 / Lower Karazhan Halls) -->
-            <div class="timer-card glow-purple border border-w-border/40 min-h-[220px] sm:min-h-[240px] 2xl:min-h-[256px] relative">
-                <div class="absolute inset-0 bg-gradient-to-t from-w-dark/90 via-w-dark/60 to-transparent z-[1]"></div>
-                <div class="relative z-[2] flex flex-col justify-between h-full p-5 sm:p-6">
-                    <div>
-                        <div class="flex items-center gap-2 mb-1">
-                            <span class="iconify w-4 h-4 sm:w-5 sm:h-5 text-purple-400" data-icon="mdi:castle"></span>
-                            <h3 class="font-cinzel text-purple-400 text-sm sm:text-base 2xl:text-[15px] font-semibold tracking-wider uppercase">Karazhan (K10)</h3>
-                        </div>
-                        <p class="text-w-text/70 text-[10px] sm:text-[11px] ml-6 sm:ml-7">Lower Karazhan Halls · 5-day lockout</p>
-                    </div>
-                    <div class="flex gap-1.5 sm:gap-2" id="timer-kara">
-                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">DAYS</div></div>
-                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">HRS</div></div>
-                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">MIN</div></div>
-                        <div class="timer-digit"><span class="text-purple-300 font-semibold text-base sm:text-lg 2xl:text-xl font-inter">--</span><div class="text-w-dim text-[8px] sm:text-[9px] 2xl:text-[10px] uppercase mt-0.5 sm:mt-1">SEC</div></div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="gold-sep mb-8"></div>
 
         <!-- Schedule Tables -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
